@@ -1,0 +1,22 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual Environments
+venv/
+.env/
+env/
+ENV/
+
+# IDE / Editor configurations
+.vscode/
+.idea/
+
+# Local Resume Files
+*.pdf
+rendered_resume.html
+
+# Browser data/profile
+chrome-profile/
+chrome_debug.log

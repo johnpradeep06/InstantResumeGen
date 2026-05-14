@@ -1,14 +1,23 @@
-<!-- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <title>{{ data.name }} - Resume</title>
   <style>
+    @page {
+      size: A4;
+      margin: 0.32in;
+    }
+
     body {
       font-family: Arial, sans-serif;
       background: #ffffff;
       color: #000;
       padding: 0;
+      margin: 0;
+      font-size: 11px;
+      line-height: 1.25;
     }
 
     .container {
@@ -20,11 +29,11 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 20px;
+      margin-bottom: 8px;
     }
 
     .header h1 {
-      font-size: 28px;
+      font-size: 22px;
       margin: 0;
     }
 
@@ -34,7 +43,7 @@
     }
 
     .contact {
-      font-size: 15px;
+      font-size: 11px;
       color: #333;
       text-align: right;
     }
@@ -58,59 +67,95 @@
 
     .section-title {
       background-color: #e3eaf3;
-      padding: 6px 10px;
-      font-size: 16px;
+      padding: 3px 8px;
+      font-size: 12px;
       font-weight: bold;
       border-left: 4px solid #007acc;
-      margin-top: 20px;
+      margin-top: 8px;
+      margin-bottom: 4px;
+    }
+
+    p {
+      margin: 4px 0;
     }
 
     ul {
       padding-left: 20px;
-      margin: 10px 0;
+      margin: 4px 0;
     }
 
     li {
-      margin-bottom: 5px;
+      margin-bottom: 2px;
     }
 
     .three-column {
       column-count: 3;
-      column-gap: 20px;
+      column-gap: 16px;
       list-style-type: disc;
       padding-left: 20px;
-      margin: 10px 0;
+      margin: 4px 0;
     }
 
     .three-column li {
       break-inside: avoid;
-      margin-bottom: 8px;
+      margin-bottom: 2px;
     }
-    
+
     .project-header {
       display: flex;
       justify-content: space-between;
       font-weight: bold;
-      margin-top: 15px;
-      font-size: 16px;
+      margin-top: 6px;
+      font-size: 12px;
     }
 
     .duration {
-      font-size: 15px;
+      font-size: 11px;
       font-weight: bold;
       text-align: right;
     }
 
+    .experience-item {
+      margin-top: 4px;
+    }
+
+    .experience-header {
+      display: flex;
+      justify-content: space-between;
+      font-weight: bold;
+      font-size: 11px;
+    }
+
+    .education-sub {
+      margin-top: 2px;
+      font-size: 11px;
+    }
+
+    .education-points {
+      padding-left: 20px;
+      margin: 3px 0;
+    }
+
+    .education-points li {
+      margin-bottom: 2px;
+    }
   </style>
 </head>
+
 <body>
   <div class="container">
     <div class="header">
-      <h1><a href="https://dhanush-dev.tech/">{{ data.name }}</a></h1>
+      <h1>
+        {% if data.portfolio %}
+        <a href="{{ data.portfolio }}">{{ data.name }}</a>
+        {% else %}
+        {{ data.name }}
+        {% endif %}
+      </h1>
       <div class="contact">
-        <a href="{{ data.linkedin }}">LinkedIn</a> |
-        <a href="{{ data.github }}">GitHub</a> |
-        <a href="https://dhanush-dev.tech/">Portfolio</a> |
+        {% if data.linkedin %}<a href="{{ data.linkedin }}">LinkedIn</a> | {% endif %}
+        {% if data.github %}<a href="{{ data.github }}">GitHub</a> | {% endif %}
+        {% if data.portfolio %}<a href="{{ data.portfolio }}">Portfolio</a> | {% endif %}
         {{ data.email }} |
         {{ data.phone }}
       </div>
@@ -122,7 +167,7 @@
     <h2 class="section-title">FUNCTIONAL AREAS</h2>
     <ul class="three-column">
       {% for item in data.functional_areas %}
-        <li>{{ item }}</li>
+      <li>{{ item }}</li>
       {% endfor %}
     </ul>
 
@@ -130,282 +175,131 @@
     <h2 class="section-title">TECHNICAL SKILLS</h2>
     <ul>
       {% for skill in data.technical_skills %}
-        <li>{{ skill|safe }}</li>
-      {% endfor %}
-    </ul>
-
-    <h2 class="section-title">PROJECTS</h2>
-
-    <div class="project">
-      <div class="project-header">
-        <span>{{ data.project1_title }}</span>
-        <span class="duration">{{ data.project1_duration }}</span>
-      </div>
-      <ul>
-        {% for point in data.project1_points %}
-          <li>{{ point }}</li>
-        {% endfor %}
-      </ul>
-    </div>
-
-    <div class="project">
-      <div class="project-header">
-        <span>{{ data.project2_title }}</span>
-        <span class="duration">{{ data.project2_duration }}</span>
-      </div>
-      <ul>
-        {% for point in data.project2_points %}
-          <li>{{ point }}</li>
-        {% endfor %}
-      </ul>
-    </div>
-
-    <h2 class="section-title">ACHIEVEMENTS</h2>
-    <ul>
-      {% for a in data.achievements %}
-        <li>{{ a }}</li>
-      {% endfor %}
-    </ul>
-
-    <h2 class="section-title">VOLUNTEER EXPERIENCE</h2>
-    <ul>
-      {% for v in data.volunteer_experience %}
-        <li>{{ v }}</li>
+      <li>{{ skill|safe }}</li>
       {% endfor %}
     </ul>
 
     <h2 class="section-title">EDUCATION</h2>
-    <div class="education-line">
-      <strong>Bachelor of Technology [B.Tech] in Artificial Intelligence and Data Science</strong>
-      <strong>08/2023 – Present</strong>
-    </div>
-    <p>Rajalakshmi Engineering College</p>
-    <p>Tech Associate at DEVS Club, Tech-Ops at GDG; 3+ events coordinated; 2 technical talks delivered</p>
-  </div>
-</body>
-</html> -->
-
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <title>{{ data.name }} - Resume</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #ffffff;
-      color: #000;
-      padding: 0;
-    }
-
-    .container {
-      margin: 0 auto;
-      background-color: #fff;
-    }
-
-    .header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 20px;
-    }
-
-    .header h1 {
-      font-size: 28px;
-      margin: 0;
-    }
-
-    .header a {
-      color: #007acc;
-      text-decoration: none;
-    }
-
-    .contact {
-      font-size: 15px;
-      color: #333;
-      text-align: right;
-    }
-
-    .bullet {
-      margin-right: 5px;
-      color: #000;
-    }
-
-    .contact a {
-      color: #0066cc;
-      text-decoration: none;
-    }
-
-    .education-line {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-    }
-
-
-    .section-title {
-      background-color: #e3eaf3;
-      padding: 6px 10px;
-      font-size: 16px;
-      font-weight: bold;
-      border-left: 4px solid #007acc;
-      margin-top: 20px;
-    }
-
-    ul {
-      padding-left: 20px;
-      margin: 10px 0;
-    }
-
-    li {
-      margin-bottom: 5px;
-    }
-
-    .three-column {
-      column-count: 3;
-      column-gap: 20px;
-      list-style-type: disc;
-      padding-left: 20px;
-      margin: 10px 0;
-    }
-
-    .three-column li {
-      break-inside: avoid;
-      margin-bottom: 8px;
-    }
-    
-    .project-header {
-      display: flex;
-      justify-content: space-between;
-      font-weight: bold;
-      margin-top: 15px;
-      font-size: 16px;
-    }
-
-    .duration {
-      font-size: 15px;
-      font-weight: bold;
-      text-align: right;
-    }
-
-    /* New styles for functional areas table */
-    .functional-areas-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin: 10px 0;
-    }
-    .functional-areas-table td {
-      vertical-align: top;
-      padding-right: 20px;
-    }
-    .functional-areas-table ul {
-      margin: 0;
-      padding-left: 20px;
-      list-style-type: disc;
-    }
-    .functional-areas-table li {
-      margin-bottom: 8px;
-    }
-  </style>
-</head>
-<body>
-  <div class="container">
-    <div class="header">
-      <h1><a href="https://dhanush-dev.tech/">{{ data.name }}</a></h1>
-      <div class="contact">
-        <a href="{{ data.linkedin }}">LinkedIn</a> |
-        <a href="{{ data.github }}">GitHub</a> |
-        <a href="https://dhanush-dev.tech/">Portfolio</a> |
-        {{ data.email }} |
-        {{ data.phone }}
+    <div class="experience-item">
+      <div class="experience-header">
+        <span>{{ data.education.degree }}</span>
+        <span>{{ data.education.duration }}</span>
       </div>
     </div>
 
-    <h2 class="section-title">PROFILE SUMMARY</h2>
-    <p class="summary">{{ data.profile_summary }}</p>
-
-    <h2 class="section-title">FUNCTIONAL AREAS</h2>
-    <table class="functional-areas-table">
-      <tr>
-        <td>
-          <ul>
-            {% for item in data.functional_areas[0:2] %}
-              <li>{{ item }}</li>
-            {% endfor %}
-          </ul>
-        </td>
-        <td>
-          <ul>
-            {% for item in data.functional_areas[2:4] %}
-              <li>{{ item }}</li>
-            {% endfor %}
-          </ul>
-        </td>
-        <td>
-          <ul>
-            {% for item in data.functional_areas[4:6] %}
-              <li>{{ item }}</li>
-            {% endfor %}
-          </ul>
-        </td>
-      </tr>
-    </table>
-
-    <h2 class="section-title">TECHNICAL SKILLS</h2>
-    <ul>
-      {% for skill in data.technical_skills %}
-        <li>{{ skill|safe }}</li>
-      {% endfor %}
-    </ul>
+    <h2 class="section-title">EXPERIENCE</h2>
+    {% for item in data.experience %}
+    <div class="experience-item">
+      <div class="experience-header">
+        <span>{{ item.company }} - {{ item.role }}</span>
+        <span>{{ item.duration }}</span>
+      </div>
+      <p>{{ item.description }}</p>
+    </div>
+    {% endfor %}
 
     <h2 class="section-title">PROJECTS</h2>
 
-    <div class="project">
-      <div class="project-header">
-        <span>{{ data.project1_title }}</span>
-        <span class="duration">{{ data.project1_duration }}</span>
-      </div>
-      <ul>
-        {% for point in data.project1_points %}
+    {% if data.projects %}
+      {% for project in data.projects %}
+      <div class="project">
+        <div class="project-header">
+          <span>{{ project.title }}</span>
+          <span class="duration">{{ project.duration }}</span>
+        </div>
+        <ul>
+          {% for point in project.points %}
           <li>{{ point }}</li>
-        {% endfor %}
-      </ul>
-    </div>
-
-    <div class="project">
-      <div class="project-header">
-        <span>{{ data.project2_title }}</span>
-        <span class="duration">{{ data.project2_duration }}</span>
+          {% endfor %}
+        </ul>
       </div>
-      <ul>
-        {% for point in data.project2_points %}
+      {% endfor %}
+    {% else %}
+      {% if data.project1_title %}
+      <div class="project">
+        <div class="project-header">
+          <span>{{ data.project1_title }}</span>
+          <span class="duration">{{ data.project1_duration }}</span>
+        </div>
+        <ul>
+          {% for point in data.project1_points %}
           <li>{{ point }}</li>
-        {% endfor %}
-      </ul>
-    </div>
+          {% endfor %}
+        </ul>
+      </div>
+      {% endif %}
 
+      {% if data.project2_title %}
+      <div class="project">
+        <div class="project-header">
+          <span>{{ data.project2_title }}</span>
+          <span class="duration">{{ data.project2_duration }}</span>
+        </div>
+        <ul>
+          {% for point in data.project2_points %}
+          <li>{{ point }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+      {% endif %}
+
+      {% if data.project3_title %}
+      <div class="project">
+        <div class="project-header">
+          <span>{{ data.project3_title }}</span>
+          <span class="duration">{{ data.project3_duration }}</span>
+        </div>
+        <ul>
+          {% for point in data.project3_points %}
+          <li>{{ point }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+      {% endif %}
+
+      {% if data.project4_title %}
+      <div class="project">
+        <div class="project-header">
+          <span>{{ data.project4_title }}</span>
+          <span class="duration">{{ data.project4_duration }}</span>
+        </div>
+        <ul>
+          {% for point in data.project4_points %}
+          <li>{{ point }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+      {% endif %}
+    {% endif %}
+
+    {% if data.achievements %}
     <h2 class="section-title">ACHIEVEMENTS</h2>
     <ul>
       {% for a in data.achievements %}
-        <li>{{ a }}</li>
+      <li>{{ a }}</li>
       {% endfor %}
     </ul>
+    {% endif %}
 
+    {% if data.course_certifications %}
+    <h2 class="section-title">COURSE CERTIFICATIONS</h2>
+    <ul>
+      {% for c in data.course_certifications %}
+      <li>{{ c }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+
+    {% if data.volunteer_experience %}
     <h2 class="section-title">VOLUNTEER EXPERIENCE</h2>
     <ul>
       {% for v in data.volunteer_experience %}
-        <li>{{ v }}</li>
+      <li>{{ v }}</li>
       {% endfor %}
     </ul>
+    {% endif %}
 
-    <h2 class="section-title">EDUCATION</h2>
-    <div class="education-line">
-      <strong>Bachelor of Technology [B.Tech] in Artificial Intelligence and Data Science</strong>
-      <strong>08/2023 – Present</strong>
-    </div>
-    <p>Rajalakshmi Engineering College</p>
-    <p>Tech Associate at DEVS Club, Tech-Ops at GDG; 3+ events coordinated; 2 technical talks delivered</p>
   </div>
 </body>
+
 </html>

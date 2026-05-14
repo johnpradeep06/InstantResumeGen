@@ -1,0 +1,95 @@
+{
+  "name": "Bhavana S",
+  "email": "bhavana30vlr@gmail.com",
+  "phone": "+91-6383418902",
+  "linkedin": "https://www.linkedin.com/in/bhavana-senthilkumar-866aab279",
+  "github": "https://github.com/bhavana-dnd",
+  "profile_summary": "I'm a passionate Software Engineering student at VIT with a strong interest in AI, Machine Learning, Full Stack Development, and intelligent digital experiences. I love building impactful solutions that blend creativity, functionality, and real-world problem solving. I'm especially driven by sustainability-focused AI research, intelligent automation, and creating meaningful user-centered technology.",
+  "functional_areas": [
+    "Machine Learning",
+    "Full Stack Development",
+    "AI Engineer",
+    "GenAI Expert",
+    "AI Analyst",
+    "DevOps Engineer"
+  ],
+  "technical_skills": [
+    "Programming Languages - Python, JavaScript, TypeScript, Java, C, C++",
+    "Frontend Development - React.js, Next.js, Tailwind CSS, HTML5, CSS3, Vite, Responsive Web Design",
+    "Backend Development - Node.js, Express.js, Flask, RESTful APIs, API Integration",
+    "AI / Machine Learning - Machine Learning, Deep Learning, OpenCV, TensorFlow, PyTorch, Scikit-learn, LSTM, Random Forest, Gemini API, LangChain, RAG, LLM Applications",
+    "Database & Cloud - MongoDB, MySQL, Firebase, Supabase, Vector Databases (Chroma)",
+    "DevOps & Developer Tools - Git, GitHub, Docker, Kubernetes, Postman, Vercel, VS Code",
+    "Automation & Data Processing - Web Scraping, Puppeteer, Cheerio, N8N, Data Preprocessing, Time-Series Analysis",
+    "Core Concepts - Data Structures & Algorithms, Object-Oriented Programming, DBMS, Operating Systems, Computer Networks",
+    "Soft Skills - Communication, Leadership, Problem Solving, Team Collaboration, Teaching & Mentorship"
+  ],
+  "experience": [
+    {
+      "company": "Springdays International School",
+      "role": "Tech and Communication Intern",
+      "duration": "05/2025 - Present",
+      "description": "Developed and managed web pages and digital resources for the institution while supporting technology-driven classroom activities. Conducted communication skill development sessions for students and collaborated with educators on interactive learning initiatives."
+    },
+    {
+      "company": "Centre of CDMM, VIT",
+      "role": "ML Intern",
+      "duration": "05/2025 - 06/2025",
+      "description": "Contributed toward predictive maintenance approaches for solar infrastructure in polluted regions and supported sustainability-focused AI research using models like LSTM and Random Forest."
+    }
+  ],
+  "projects": [
+    {
+      "title": "AI Autonomous Food Monitoring System",
+      "duration": "01/2025 – Present",
+      "points": [
+        "Developed an AI-powered food monitoring system using OpenCV and Gemini API for intelligent food detection and tracking.",
+        "Implemented computer vision techniques for real-time food recognition and autonomous monitoring workflows.",
+        "Integrated AI-based analysis to improve food classification accuracy and monitoring efficiency.",
+        "Designed a scalable system architecture for smart food management applications."
+      ]
+    },
+    {
+      "title": "AI Counterfeit Detection using Blockchain",
+      "duration": "02/2026 - 04/2026",
+      "points": [
+        "Built an AI + Blockchain-based counterfeit detection system for product authenticity verification.",
+        "Implemented intelligent validation mechanisms to identify counterfeit products using AI models.",
+        "Integrated blockchain concepts for secure product verification and tamper-resistant record management.",
+        "Focused on improving transparency and trust in product authentication workflows."
+      ]
+    },
+    {
+      "title": "Memory Retention & Prediction Model",
+      "duration": "02/2026 - 04/2026",
+      "points": [
+        "Built a predictive machine learning model to analyze memory retention patterns and behavioral trends.",
+        "Performed data preprocessing, feature engineering, and model evaluation using real-world datasets.",
+        "Implemented AI-driven prediction techniques to improve retention analysis and behavioral forecasting.",
+        "Focused on intelligent pattern recognition and data-driven decision-making approaches."
+      ]
+    },
+    {
+      "title": "Solar Panel Efficiency Prediction using AI/ML",
+      "duration": "05/2025 – 06/2025",
+      "points": [
+        "Developed predictive AI/ML models to estimate solar panel efficiency loss caused by pollutant deposition.",
+        "Built Random Forest and LSTM models to analyze the impact of PM2.5, carbon monoxide, and dust on solar energy generation.",
+        "Worked with real-world environmental and solar datasets involving preprocessing, feature engineering, and time-series analysis.",
+        "Contributed toward sustainability-focused predictive maintenance solutions for solar infrastructure in polluted regions."
+      ]
+    }
+  ],
+  "course_certifications": [
+    "Full Stack JAVA Certification from IIT-Guwahati",
+    "IBM Agentic AI Certification",
+    "Google Generative AI Course Series (GAIL)"
+  ],
+  "volunteer_experience": [
+    "Senior Core Member at LEO CLUB VIT Vellore"
+  ],
+  "education": {
+    "degree": "M.Tech Integrated in Software Engineering, VIT Vellore",
+    "duration": "08/2023 – 05/2028"
+  }
+}

@@ -1,0 +1,91 @@
+{
+  "name": "John pradeepraj",
+  "email": "johnpradeep100@gmail.com",
+  "phone": "+91-9444542079",
+  "linkedin": "https://www.linkedin.com/in/john-pradeepraj-745212278",
+  "github": "https://github.com/johnpradeep06",
+  "profile_summary": "AI Engineer and Full Stack Developer with 2+ years of experience delivering production ready applications. Expertise in leveraging AI and automation to improve process efficiency. Proficient in Python, Next.js, React.js, and FastAPI for building scalable data solutions.",
+  "functional_areas": [
+    "Machine Learning",
+    "Full Stack Development",
+    "AI Engineer",
+    "Automation",
+    "GenAI Development",
+    "AI Agents"
+  ],
+  "technical_skills": [
+    "Programming - TypeScript, Python, JavaScript, Java, C, C++",
+    "Frontend Development - React.js, Next.js, Tailwind CSS, Vite, shadcn/ui, Responsive UI design",
+    "Backend Development - Node.js, Express.js, Flask, REST API design, JWT Authentication",
+    "AI / LLM Engineering - OpenRouter APIs, RAG, LangChain, Grounding, Scikit-learn, PyTorch",
+    "Data & Storage - Supabase, MySQL, Vector Databases (Chroma)",
+    "DevOps & Tools - Git, Postman, Vercel, Firebase, Puppeteer, Cheerio, N8N"
+  ],
+  "experience": [
+    {
+      "company": "Beira Startup",
+      "role": "Tech Lead",
+      "duration": "12/2025 - Present",
+      "description": "Leading development of an AI-powered platform that converts vague client design ideas into clear, designer-ready briefs."
+    },
+    {
+      "company": "United Techno",
+      "role": "ML Intern",
+      "duration": "05/2025 - 08/2025",
+      "description": "Built an inventory demand prediction system using SQL Server, Flask, XGBoost, SVM, and regression models."
+    },
+    {
+      "company": "Perplexity",
+      "role": "Campus Ambassador",
+      "duration": "07/2025 - 12/2025",
+      "description": "Grew Perplexity AI's presence at VIT Vellore through events, workshops, and student community initiatives."
+    }
+  ],
+  "project1_title": "Inventory Management System with QR Code Tracking",
+  "project1_duration": "12/2024 – 01/2025",
+  "project1_points": [
+    "Built a SaaS platform using React (Vite.js) with ShadCN UI and Tailwind CSS for a responsive and modern interface.",
+    "Integrated 70+ APIs to enable QR-based stock tracking, POS operations, and real-time low-stock alerts.",
+    "Designed an employee scheduling system with a Google Calendar-style UI for managing availability and shifts.",
+    "Implemented secure authentication using Firebase and JWT for role-based access control.",
+    "Integrated Gemini Flash 2.0 API for a context-aware AI assistant and applied SARIMAX in Django for intelligent sales and order forecasting."
+  ],
+  "project2_title": "AI-Powered Marketplace for Designers and Founders",
+  "project2_duration": "06/2024 – 12/2024",
+  "project2_points": [
+    "Developed an AI-powered conversational assistant to automate merchandise brief creation through intelligent founder interviews.",
+    "Integrated LLMs (GPT-4o-mini via OpenRouter API) for context-aware interactions and structured output generation.",
+    "Built a responsive web application using Next.js, React, and Tailwind CSS with modern UI components and animations.",
+    "Implemented backend services using Firebase and Cloudinary for data management and file handling."
+  ],
+  "project3_title": "Personalised Campus LLM",
+  "project3_duration": "12/2025 - Present",
+  "project3_points": [
+    "Developed a full-stack RAG (Retrieval Augmented Generation) system using Next.js (frontend) and FastAPI (backend) with a modular architecture.",
+    "Implemented secure authentication and role-based access control (Admin/Student) using JWT and SQLite for user management.",
+    "Designed a context-aware AI chat system integrating OpenRouter LLM to answer queries based on uploaded knowledge.",
+    "Developed a responsive, dark-themed chat UI with seamless interaction between frontend and backend services.",
+    "Ensured persistent storage and efficient retrieval using ChromaDB, maintaining knowledge across server restarts."
+  ],
+  "project4_title": "Ai Deepfake Detection",
+  "project4_duration": "",
+  "project4_points": [
+    "Designed and developed a multi-layer forensic image analysis system to detect deepfakes images.",
+    "Combined AI-based detection with traditional forensic techniques, including Frequency Domain Analysis (FFT), Error Level Analysis (ELA), and EXIF metadata inspection.",
+    "Built a decision pipeline leveraging an open-source Hugging Face model and an OpenRouter VLM to classify images as AI-generated, edited, or authentic.",
+    "Developed a full-stack solution using Next.js (frontend) and FastAPI (backend) with SQLite DB."
+  ],
+  "achievements": [
+    "Winner, Yukta 26 Hackathon (National Level) – ₹10,000 prize, Top 1 among 250+ teams",
+    "Winner, Aicon at Sairam Engineering College (National Level) – ₹10,000 prize, out of 100+ teams",
+    "Winner, Codeathon 2.0 – ₹10,000 prize, ranked 1st among 50+ colleges",
+    "Winner, Park College Codeathon – ₹1,500 prize, from 600+ participants"
+  ],
+  "volunteer_experience": [
+    "Senior core member at THE AI/ML CLUB VIT Vellore"
+  ],
+  "education": {
+    "degree": "M.Tech Integrated in Software Engineering, VIT Vellore",
+    "duration": "08/2023 – 05/2028"
+  }
+}

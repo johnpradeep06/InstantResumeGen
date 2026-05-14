@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Antigravity Resume Generator</title>
+  <meta name="description" content="Generate pixel-perfect, professional resumes instantly from JSON data.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-primary: #0a0c10;
+      --bg-secondary: #10141d;
+      --accent-primary: #4361ee;
+      --accent-hover: #3046c9;
+      --accent-glow: rgba(67, 97, 238, 0.4);
+      --text-main: #f8f9fa;
+      --text-muted: #a0aab4;
+      --border-color: rgba(255, 255, 255, 0.08);
+      --glass-bg: rgba(16, 20, 29, 0.65);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-primary);
+      color: var(--text-main);
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Animated Background Orbs */
+    body::before, body::after {
+      content: "";
+      position: absolute;
+      width: 40vw;
+      height: 40vw;
+      border-radius: 50%;
+      filter: blur(120px);
+      z-index: -1;
+      opacity: 0.4;
+      animation: float 15s infinite ease-in-out alternate;
+    }
+
+    body::before {
+      background: radial-gradient(circle, #3f37c9, #4895ef);
+      top: -10%;
+      left: -10%;
+    }
+
+    body::after {
+      background: radial-gradient(circle, #7209b7, #f72585);
+      bottom: -10%;
+      right: -10%;
+      animation-delay: -7s;
+    }
+
+    @keyframes float {
+      0% { transform: translate(0, 0) scale(1); }
+      100% { transform: translate(50px, 50px) scale(1.1); }
+    }
+
+    .app-container {
+      width: 90%;
+      max-width: 900px;
+      backdrop-filter: blur(16px) saturate(180%);
+      -webkit-backdrop-filter: blur(16px) saturate(180%);
+      background-color: var(--glass-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 24px;
+      padding: 40px;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5);
+      animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    header {
+      margin-bottom: 32px;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 32px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      background: linear-gradient(135deg, #fff 30%, #a0aab4 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 8px;
+    }
+
+    header p {
+      color: var(--text-muted);
+      font-size: 16px;
+    }
+
+    .form-group {
+      margin-bottom: 24px;
+    }
+
+    label {
+      display: block;
+      font-size: 14px;
+      font-weight: 500;
+      margin-bottom: 8px;
+      color: var(--text-main);
+      letter-spacing: 0.5px;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      background-color: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 14px 18px;
+      color: var(--text-main);
+      font-size: 15px;
+      transition: all 0.3s ease;
+      outline: none;
+    }
+
+    input[type="text"]:focus {
+      border-color: var(--accent-primary);
+      box-shadow: 0 0 0 4px var(--accent-glow);
+      background-color: rgba(255, 255, 255, 0.05);
+    }
+
+    .json-editor-wrapper {
+      position: relative;
+      border-radius: 12px;
+      border: 1px solid var(--border-color);
+      overflow: hidden;
+      transition: all 0.3s ease;
+      background-color: rgba(10, 12, 16, 0.8);
+    }
+
+    .json-editor-wrapper:focus-within {
+      border-color: var(--accent-primary);
+      box-shadow: 0 0 0 4px var(--accent-glow);
+    }
+
+    textarea {
+      width: 100%;
+      height: 320px;
+      background: transparent;
+      border: none;
+      padding: 20px;
+      color: #e2e8f0;
+      font-family: 'Fira Code', monospace;
+      font-size: 13px;
+      line-height: 1.6;
+      resize: vertical;
+      outline: none;
+    }
+
+    .actions {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 16px;
+    }
+
+    button {
+      background-color: var(--accent-primary);
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      padding: 14px 28px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
+    }
+
+    button:hover {
+      background-color: var(--accent-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(67, 97, 238, 0.4);
+    }
+
+    button:active {
+      transform: translateY(1px);
+    }
+
+    button:disabled {
+      background-color: #334155;
+      cursor: not-allowed;
+      box-shadow: none;
+      transform: none;
+      opacity: 0.7;
+    }
+
+    .btn-secondary {
+      background-color: rgba(255, 255, 255, 0.05);
+      color: var(--text-main);
+      border: 1px solid var(--border-color);
+      box-shadow: none;
+    }
+
+    .btn-secondary:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.2);
+      box-shadow: none;
+    }
+
+    /* Loading indicator inside button */
+    .spinner {
+      width: 18px;
+      height: 18px;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      border-top-color: #fff;
+      animation: spin 0.8s linear infinite;
+      display: none;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .loading .spinner {
+      display: block;
+    }
+    .loading .btn-text {
+      display: none;
+    }
+
+    /* Notification Toast */
+    #toast {
+      position: fixed;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: #ef233c;
+      color: #fff;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 500;
+      opacity: 0;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      z-index: 1000;
+      box-shadow: 0 10px 25px rgba(239, 35, 60, 0.3);
+    }
+
+    #toast.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+
+    #toast.success {
+      background: #2ec4b6;
+      box-shadow: 0 10px 25px rgba(46, 196, 182, 0.3);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="app-container">
+    <header>
+      <h1>Resume Builder</h1>
+      <p>Paste your professional data in JSON to generate a stunning PDF resume.</p>
+    </header>
+
+    <main>
+      <div class="form-group">
+        <label for="filename">Resume Name</label>
+        <input type="text" id="filename" placeholder="e.g., my_awesome_resume" value="bhavana_one_page_resume" required>
+      </div>
+
+      <div class="form-group">
+        <label for="json-data">JSON Payload</label>
+        <div class="json-editor-wrapper">
+          <textarea id="json-data" spellcheck="false" placeholder='Paste your JSON schema here...'></textarea>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button type="button" class="btn-secondary" id="load-sample">Load Sample</button>
+        <button type="button" id="generate-btn">
+          <span class="spinner"></span>
+          <span class="btn-text">Generate & Download PDF</span>
+        </button>
+      </div>
+    </main>
+  </div>
+
+  <div id="toast">Error validating request.</div>
+
+  <script>
+    const jsonInput = document.getElementById('json-data');
+    const filenameInput = document.getElementById('filename');
+    const generateBtn = document.getElementById('generate-btn');
+    const loadSampleBtn = document.getElementById('load-sample');
+    const toast = document.getElementById('toast');
+
+    const sampleJson = {
+      "name": "Bhavana S",
+      "email": "bhavana30vlr@gmail.com",
+      "phone": "+91-6383418902",
+      "linkedin": "https://www.linkedin.com/in/bhavana-senthilkumar-866aab279",
+      "github": "https://github.com/bhavana-dnd",
+      "profile_summary": "I'm a passionate Software Engineering student at VIT with a strong interest in AI, Machine Learning, Full Stack Development, and intelligent digital experiences.",
+      "functional_areas": ["Machine Learning", "Full Stack Development", "AI Engineer"],
+      "technical_skills": [
+        "Programming Languages - Python, JavaScript, Java",
+        "Web Dev - React.js, Node.js, HTML5, CSS3"
+      ],
+      "experience": [
+        {
+          "company": "Springdays International School",
+          "role": "Tech Intern",
+          "duration": "05/2025 - Present",
+          "description": "Developed web resources and assisted in technological workflows."
+        }
+      ],
+      "projects": [
+        {
+          "title": "AI Autonomous Food Monitoring",
+          "duration": "01/2025 – Present",
+          "points": ["Built custom detectors", "Integrated APIs"]
+        }
+      ],
+      "course_certifications": ["Full Stack JAVA Certification"],
+      "volunteer_experience": ["Senior Core Member at LEO CLUB"],
+      "education": {
+        "degree": "M.Tech in Software Engineering",
+        "duration": "2023 – 2028"
+      }
+    };
+
+    // Load initial sample
+    jsonInput.value = JSON.stringify(sampleJson, null, 2);
+
+    loadSampleBtn.addEventListener('click', () => {
+      jsonInput.value = JSON.stringify(sampleJson, null, 2);
+      showToast('Sample loaded successfully!', true);
+    });
+
+    function showToast(message, isSuccess = false) {
+      toast.textContent = message;
+      toast.className = isSuccess ? 'success show' : 'show';
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 4000);
+    }
+
+    generateBtn.addEventListener('click', async () => {
+      const rawJson = jsonInput.value.trim();
+      let filename = filenameInput.value.trim() || 'resume';
+      
+      if (!filename.endsWith('.pdf')) {
+        filename += '.pdf';
+      }
+
+      if (!rawJson) {
+        showToast('JSON payload cannot be empty.');
+        return;
+      }
+
+      let parsedData;
+      try {
+        parsedData = JSON.parse(rawJson);
+      } catch (err) {
+        showToast('Invalid JSON structure. Please check for syntax errors.');
+        return;
+      }
+
+      // Lock UI
+      generateBtn.classList.add('loading');
+      generateBtn.disabled = true;
+
+      try {
+        const response = await fetch('/pdf', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            data: parsedData,
+            filename: filename
+          })
+        });
+
+        if (!response.ok) {
+          const errData = await response.json().catch(() => ({}));
+          throw new Error(errData.error || `Server returned ${response.status}`);
+        }
+
+        const blob = await response.blob();
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.style.display = 'none';
+        a.href = url;
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        window.URL.revokeObjectURL(url);
+        
+        showToast('Resume generated and downloading!', true);
+      } catch (error) {
+        console.error(error);
+        showToast(`Failed: ${error.message}`);
+      } finally {
+        generateBtn.classList.remove('loading');
+        generateBtn.disabled = false;
+      }
+    });
+  </script>
+</body>
+</html>
