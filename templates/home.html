@@ -279,15 +279,52 @@
       }
       h1 { font-size: 48px; }
     }
+
+    footer {
+      padding: 24px;
+      text-align: center;
+      border-top: 1px solid var(--border-color);
+      background: rgba(10, 12, 16, 0.8);
+      backdrop-filter: blur(10px);
+      margin-top: auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 12px;
+      z-index: 10;
+    }
+    
+    .footer-text {
+      color: var(--text-muted);
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .footer-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 6px 16px;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .footer-btn:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(67, 97, 238, 0.5);
+      color: #fff;
+    }
   </style>
 </head>
 <body>
   <nav>
     <a href="/" class="logo">ResumeBuilder</a>
-    <div class="nav-links">
-      <a href="https://github.com/dhanush-ts" target="_blank">GitHub</a>
-      <a href="https://www.linkedin.com/in/johnpradeepraj" target="_blank">LinkedIn</a>
-    </div>
   </nav>
 
   <main>
@@ -348,5 +385,11 @@
       </div>
     </div>
   </main>
+
+  <footer>
+    <span class="footer-text">Made with ❤️ by</span>
+    <a href="https://www.linkedin.com/in/johnpradeepraj/" target="_blank" class="footer-btn">John</a>
+    <a href="https://www.linkedin.com/in/dhanush-ts/" target="_blank" class="footer-btn">Dhanush</a>
+  </footer>
 </body>
 </html>
