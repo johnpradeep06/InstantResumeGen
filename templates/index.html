@@ -407,7 +407,7 @@
     }
 
     loadSampleBtn.addEventListener('click', () => {
-      jsonInput.value = JSON.stringify(sampleJson, null, 2);
+      jsonInput.value = JSON.stringify(resumeData, null, 2);
       showToast('Sample loaded successfully!', true);
     });
 
@@ -465,12 +465,8 @@
     });
 
     // Initial load
-    jsonInput.value = JSON.stringify(sampleJson, null, 2);
+    jsonInput.value = JSON.stringify(resumeData, null, 2);
 
   </script>
 </body>
-
-</html>cript>
-</body>
-
 </html>
