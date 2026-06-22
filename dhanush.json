@@ -1,9 +1,9 @@
 {
-  "name": "John pradeepraj",
-  "email": "johnpradeep100@gmail.com",
-  "phone": "+91-9444542079",
-  "linkedin": "https://www.linkedin.com/in/john-pradeepraj-745212278",
-  "github": "https://github.com/johnpradeep06",
+  "name": "John Doe",
+  "email": "johndoe100@gmail.com",
+  "phone": "+91-9876543210",
+  "linkedin": "https://www.linkedin.com/in/john-doe-745212278",
+  "github": "https://github.com/johndoe06",
   "profile_summary": "AI Engineer and Full Stack Developer with 2+ years of experience delivering production ready applications. Expertise in leveraging AI and automation to improve process efficiency. Proficient in Python, Next.js, React.js, and FastAPI for building scalable data solutions.",
   "functional_areas": [
     "Machine Learning",
@@ -23,22 +23,22 @@
   ],
   "experience": [
     {
-      "company": "Beira Startup",
+      "company": "Nova Labs",
       "role": "Tech Lead",
       "duration": "12/2025 - Present",
       "description": "Leading development of an AI-powered platform that converts vague client design ideas into clear, designer-ready briefs."
     },
     {
-      "company": "United Techno",
+      "company": "DataSphere Solutions",
       "role": "ML Intern",
       "duration": "05/2025 - 08/2025",
       "description": "Built an inventory demand prediction system using SQL Server, Flask, XGBoost, SVM, and regression models."
     },
     {
-      "company": "Perplexity",
+      "company": "Insight AI",
       "role": "Campus Ambassador",
       "duration": "07/2025 - 12/2025",
-      "description": "Grew Perplexity AI's presence at VIT Vellore through events, workshops, and student community initiatives."
+      "description": "Grew Insight AI's presence at State University through events, workshops, and student community initiatives."
     }
   ],
   "project1_title": "Inventory Management System with QR Code Tracking",
@@ -76,16 +76,16 @@
     "Developed a full-stack solution using Next.js (frontend) and FastAPI (backend) with SQLite DB."
   ],
   "achievements": [
-    "Winner, Yukta 26 Hackathon (National Level) – ₹10,000 prize, Top 1 among 250+ teams",
-    "Winner, Aicon at Sairam Engineering College (National Level) – ₹10,000 prize, out of 100+ teams",
-    "Winner, Codeathon 2.0 – ₹10,000 prize, ranked 1st among 50+ colleges",
-    "Winner, Park College Codeathon – ₹1,500 prize, from 600+ participants"
+    "Winner, TechSprint 26 Hackathon (National Level) – ₹10,000 prize, Top 1 among 250+ teams",
+    "Winner, InnovateX at Sunrise Engineering College (National Level) – ₹10,000 prize, out of 100+ teams",
+    "Winner, CodeQuest 2.0 – ₹10,000 prize, ranked 1st among 50+ colleges",
+    "Winner, Vertex College Codeathon – ₹1,500 prize, from 600+ participants"
   ],
   "volunteer_experience": [
-    "Senior core member at THE AI/ML CLUB VIT Vellore"
+    "Senior core member at THE AI/ML CLUB STATE UNIVERSITY"
   ],
   "education": {
-    "degree": "M.Tech Integrated in Software Engineering, VIT Vellore",
+    "degree": "M.Tech Integrated in Software Engineering, State University",
     "duration": "08/2023 – 05/2028"
   }
 }

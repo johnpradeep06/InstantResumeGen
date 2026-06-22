@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,7 +8,9 @@
   <meta name="description" content="Generate pixel-perfect, professional resumes instantly from JSON data.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap"
+    rel="stylesheet">
   <style>
     :root {
       --bg-primary: #0a0c10;
@@ -53,17 +56,21 @@
         flex-direction: column;
         gap: 16px;
       }
+
       .nav-actions {
         flex-direction: column;
         width: 100%;
       }
+
       .nav-actions .form-group-inline {
         width: 100%;
         justify-content: space-between;
       }
+
       input[type="text"] {
         flex: 1;
       }
+
       button {
         width: 100%;
         justify-content: center;
@@ -157,10 +164,19 @@
       display: none;
     }
 
-    @keyframes spin { to { transform: rotate(360deg); } }
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
 
-    .loading .spinner { display: block; }
-    .loading .btn-text { display: none; }
+    .loading .spinner {
+      display: block;
+    }
+
+    .loading .btn-text {
+      display: none;
+    }
 
     .editor-container {
       display: flex;
@@ -180,7 +196,7 @@
       background: var(--bg-secondary);
       border: 1px solid var(--border-color);
       border-radius: 12px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
       overflow: hidden;
     }
 
@@ -190,7 +206,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background: rgba(255,255,255,0.02);
+      background: rgba(255, 255, 255, 0.02);
     }
 
     .editor-title {
@@ -237,9 +253,12 @@
       opacity: 1;
     }
 
-    #toast.success { background: #2ec4b6; }
+    #toast.success {
+      background: #2ec4b6;
+    }
   </style>
 </head>
+
 <body>
 
   <nav>
@@ -247,7 +266,7 @@
     <div class="nav-actions">
       <div class="form-group-inline">
         <label for="filename">File:</label>
-        <input type="text" id="filename" placeholder="resume_name" value="john_resume">
+        <input type="text" id="filename" placeholder="resume_name" value="john_doe_resume">
       </div>
       <button type="button" class="btn-secondary" id="load-sample">Load Sample</button>
       <button type="button" id="generate-btn">
@@ -447,6 +466,8 @@
 
   </script>
 </body>
+
 </html>cript>
 </body>
+
 </html>
