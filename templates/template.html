@@ -28,17 +28,18 @@
     .header {
       display: flex;
       justify-content: space-between;
-      align-items: center;
+      align-items: baseline;
       margin-bottom: 8px;
     }
 
     .header h1 {
-      font-size: 22px;
+      font-size: 26px;
       margin: 0;
+      color: #0066cc;
     }
 
     .header a {
-      color: #007acc;
+      color: #0066cc;
       text-decoration: none;
     }
 
@@ -66,13 +67,15 @@
 
 
     .section-title {
-      background-color: #e3eaf3;
+      background-color: #e6f0fa;
       padding: 3px 8px;
       font-size: 12px;
       font-weight: bold;
-      border-left: 4px solid #007acc;
+      border-left: 4px solid #0066cc;
       margin-top: 8px;
       margin-bottom: 4px;
+      text-transform: uppercase;
+      color: #000;
     }
 
     p {
@@ -106,7 +109,7 @@
       justify-content: space-between;
       font-weight: bold;
       margin-top: 6px;
-      font-size: 12px;
+      font-size: 11px;
     }
 
     .duration {
@@ -272,34 +275,19 @@
       {% endif %}
     {% endif %}
 
-    {% if data.achievements %}
-    <h2 class="section-title">ACHIEVEMENTS</h2>
-    <ul>
-      {% for a in data.achievements %}
-      <li>{{ a }}</li>
-      {% endfor %}
-    </ul>
-    {% endif %}
-
-    {% if data.course_certifications %}
-    <h2 class="section-title">COURSE CERTIFICATIONS</h2>
-    <ul>
-      {% for c in data.course_certifications %}
-      <li>{{ c }}</li>
-      {% endfor %}
-    </ul>
-    {% endif %}
-
-    {% if data.volunteer_experience %}
-    <h2 class="section-title">VOLUNTEER EXPERIENCE</h2>
-    <ul>
-      {% for v in data.volunteer_experience %}
-      <li>{{ v }}</li>
-      {% endfor %}
-    </ul>
-    {% endif %}
+    {% for key, value in data.items() %}
+      {% if key not in ['name', 'email', 'phone', 'linkedin', 'github', 'portfolio', 'profile_summary', 'functional_areas', 'technical_skills', 'education', 'experience', 'projects', 'project1_title', 'project1_duration', 'project1_points', 'project2_title', 'project2_duration', 'project2_points', 'project3_title', 'project3_duration', 'project3_points', 'project4_title', 'project4_duration', 'project4_points'] %}
+        {% if value %}
+          <h2 class="section-title">{{ key | replace('_', ' ') | upper }}</h2>
+          <ul>
+            {% for item in value %}
+            <li>{{ item }}</li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+      {% endif %}
+    {% endfor %}
 
   </div>
 </body>
-
 </html>

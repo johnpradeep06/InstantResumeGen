@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Resume Generator | Minimalist Dark</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-primary: #0a0c10;
+      --bg-secondary: #10141d;
+      --accent-primary: #4361ee;
+      --accent-hover: #3046c9;
+      --accent-glow: rgba(67, 97, 238, 0.4);
+      --text-main: #f8f9fa;
+      --text-muted: #a0aab4;
+      --border-color: rgba(255, 255, 255, 0.08);
+      --glass-bg: rgba(16, 20, 29, 0.65);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-primary);
+      color: var(--text-main);
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Animated Background Orbs */
+    body::before,
+    body::after {
+      content: "";
+      position: fixed;
+      width: 40vw;
+      height: 40vw;
+      border-radius: 50%;
+      filter: blur(120px);
+      z-index: -1;
+      opacity: 0.3;
+      animation: float 15s infinite ease-in-out alternate;
+    }
+
+    body::before {
+      background: radial-gradient(circle, #3f37c9, #4895ef);
+      top: -10%;
+      left: -10%;
+    }
+
+    body::after {
+      background: radial-gradient(circle, #7209b7, #f72585);
+      bottom: -10%;
+      right: -10%;
+      animation-delay: -7s;
+    }
+
+    @keyframes float {
+      0% { transform: translate(0, 0) scale(1); }
+      100% { transform: translate(50px, 50px) scale(1.1); }
+    }
+
+    nav {
+      padding: 24px 48px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border-color);
+      background: rgba(10, 12, 16, 0.8);
+      backdrop-filter: blur(10px);
+      z-index: 10;
+    }
+
+    .logo {
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      background: linear-gradient(135deg, #fff 30%, #a0aab4 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-decoration: none;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      transition: color 0.3s;
+      margin-left: 24px;
+    }
+
+    .nav-links a:hover {
+      color: var(--text-main);
+    }
+
+    main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 60px 24px;
+      text-align: center;
+    }
+
+    .hero-content {
+      max-width: 800px;
+      margin-bottom: 60px;
+      animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    h1 {
+      font-size: 64px;
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 24px;
+      background: linear-gradient(180deg, #FFFFFF 0%, #A0AAB4 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: -2px;
+    }
+
+    p.subtitle {
+      font-size: 20px;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 40px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .cta-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background-color: var(--accent-primary);
+      color: #fff;
+      text-decoration: none;
+      padding: 16px 40px;
+      border-radius: 100px;
+      font-size: 18px;
+      font-weight: 600;
+      transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+      box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-btn::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, transparent 60%);
+      opacity: 0;
+      transform: scale(0.5);
+      transition: opacity 0.3s, transform 0.3s;
+    }
+
+    .cta-btn:hover {
+      background-color: var(--accent-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(67, 97, 238, 0.5);
+    }
+
+    .cta-btn:hover::after {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .preview-showcase {
+      width: 100%;
+      max-width: 1100px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      margin-top: 40px;
+      animation: fadeIn 1s ease-out 0.4s backwards;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .mockup-window {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 30px 60px rgba(0,0,0,0.4);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .mockup-header {
+      background: rgba(255,255,255,0.03);
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      gap: 8px;
+    }
+
+    .mockup-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #4a5568;
+    }
+    .mockup-dot.red { background: #ff5f56; }
+    .mockup-dot.yellow { background: #ffbd2e; }
+    .mockup-dot.green { background: #27c93f; }
+
+    .mockup-body {
+      padding: 24px;
+      flex: 1;
+      text-align: left;
+      font-family: 'Fira Code', monospace;
+      font-size: 13px;
+      color: #e2e8f0;
+      line-height: 1.6;
+      background: #0a0c10;
+    }
+
+    .mockup-preview {
+      background: #ffffff;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      padding: 30px;
+      color: #000;
+    }
+    
+    .resume-mockup-header {
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 2px solid #e2e8f0;
+      padding-bottom: 16px;
+      margin-bottom: 20px;
+    }
+    
+    .resume-mockup-name {
+      font-size: 24px;
+      font-family: 'Arial', sans-serif;
+      font-weight: bold;
+    }
+    
+    .resume-mockup-line {
+      height: 12px;
+      background: #e2e8f0;
+      border-radius: 4px;
+      margin-bottom: 12px;
+    }
+    .resume-mockup-line.short { width: 40%; }
+    .resume-mockup-line.medium { width: 70%; }
+    .resume-mockup-line.long { width: 100%; }
+
+    @media (max-width: 900px) {
+      .preview-showcase {
+        grid-template-columns: 1fr;
+      }
+      h1 { font-size: 48px; }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="/" class="logo">ResumeBuilder</a>
+    <div class="nav-links">
+      <a href="https://github.com" target="_blank">GitHub</a>
+    </div>
+  </nav>
+
+  <main>
+    <div class="hero-content">
+      <h1>The Minimalist JSON Resume Builder</h1>
+      <p class="subtitle">Enter your data as JSON, get a pixel-perfect PDF instantly. Zero formatting hassle. Pure content focus.</p>
+      <a href="/builder" class="cta-btn">Start Building Now</a>
+    </div>
+
+    <div class="preview-showcase">
+      <!-- Editor Mockup -->
+      <div class="mockup-window">
+        <div class="mockup-header">
+          <div class="mockup-dot red"></div>
+          <div class="mockup-dot yellow"></div>
+          <div class="mockup-dot green"></div>
+        </div>
+        <div class="mockup-body">
+<pre>
+{
+  "name": "Jane Doe",
+  "email": "jane@example.com",
+  "role": "Software Engineer",
+  "skills": [
+    "Python", "React", "Go"
+  ],
+  "experience": [
+    {
+      "company": "Tech Corp",
+      "duration": "2023 - Present"
+    }
+  ]
+}
+</pre>
+        </div>
+      </div>
+
+      <!-- Preview Mockup -->
+      <div class="mockup-window">
+        <div class="mockup-header">
+          <div class="mockup-dot red"></div>
+          <div class="mockup-dot yellow"></div>
+          <div class="mockup-dot green"></div>
+        </div>
+        <div class="mockup-preview">
+          <div class="resume-mockup-header">
+            <div class="resume-mockup-name">Jane Doe</div>
+            <div style="font-size: 12px; text-align: right; color: #4a5568;">jane@example.com<br>Software Engineer</div>
+          </div>
+          <div style="font-size: 14px; font-weight: bold; margin-bottom: 12px;">Experience</div>
+          <div class="resume-mockup-line medium"></div>
+          <div class="resume-mockup-line long"></div>
+          <div class="resume-mockup-line short"></div>
+          <div style="font-size: 14px; font-weight: bold; margin-top: 24px; margin-bottom: 12px;">Skills</div>
+          <div class="resume-mockup-line medium"></div>
+          <div class="resume-mockup-line short"></div>
+        </div>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

@@ -1,16 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Resume Generator</title>
+  <title>Resume Builder | Editor</title>
   <meta name="description" content="Generate pixel-perfect, professional resumes instantly from JSON data.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap"
-    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
   <style>
     :root {
       --bg-primary: #0a0c10;
@@ -34,213 +31,125 @@
       background-color: var(--bg-primary);
       color: var(--text-main);
       font-family: 'Inter', sans-serif;
-      min-height: 100vh;
+      height: 100vh;
       display: flex;
-      justify-content: center;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    nav {
+      padding: 16px 24px;
+      display: flex;
+      justify-content: space-between;
       align-items: center;
-      overflow-x: hidden;
-      position: relative;
+      border-bottom: 1px solid var(--border-color);
+      background: rgba(10, 12, 16, 0.8);
+      backdrop-filter: blur(10px);
+      flex-shrink: 0;
     }
 
-    /* Animated Background Orbs */
-    body::before,
-    body::after {
-      content: "";
-      position: absolute;
-      width: 40vw;
-      height: 40vw;
-      border-radius: 50%;
-      filter: blur(120px);
-      z-index: -1;
-      opacity: 0.4;
-      animation: float 15s infinite ease-in-out alternate;
-    }
-
-    body::before {
-      background: radial-gradient(circle, #3f37c9, #4895ef);
-      top: -10%;
-      left: -10%;
-    }
-
-    body::after {
-      background: radial-gradient(circle, #7209b7, #f72585);
-      bottom: -10%;
-      right: -10%;
-      animation-delay: -7s;
-    }
-
-    @keyframes float {
-      0% {
-        transform: translate(0, 0) scale(1);
+    @media (max-width: 600px) {
+      nav {
+        flex-direction: column;
+        gap: 16px;
       }
-
-      100% {
-        transform: translate(50px, 50px) scale(1.1);
+      .nav-actions {
+        flex-direction: column;
+        width: 100%;
+      }
+      .nav-actions .form-group-inline {
+        width: 100%;
+        justify-content: space-between;
+      }
+      input[type="text"] {
+        flex: 1;
+      }
+      button {
+        width: 100%;
+        justify-content: center;
       }
     }
 
-    .app-container {
-      width: 90%;
-      max-width: 900px;
-      backdrop-filter: blur(16px) saturate(180%);
-      -webkit-backdrop-filter: blur(16px) saturate(180%);
-      background-color: var(--glass-bg);
-      border: 1px solid var(--border-color);
-      border-radius: 24px;
-      padding: 40px;
-      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5);
-      animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    @keyframes slideUp {
-      from {
-        opacity: 0;
-        transform: translateY(30px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    header {
-      margin-bottom: 32px;
-      text-align: center;
-    }
-
-    header h1 {
-      font-size: 32px;
+    .logo {
+      font-size: 18px;
       font-weight: 700;
       letter-spacing: -0.5px;
       background: linear-gradient(135deg, #fff 30%, #a0aab4 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      margin-bottom: 8px;
+      text-decoration: none;
     }
 
-    header p {
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .form-group-inline {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .form-group-inline label {
+      font-size: 13px;
       color: var(--text-muted);
-      font-size: 16px;
-    }
-
-    .form-group {
-      margin-bottom: 24px;
-    }
-
-    label {
-      display: block;
-      font-size: 14px;
-      font-weight: 500;
-      margin-bottom: 8px;
-      color: var(--text-main);
-      letter-spacing: 0.5px;
     }
 
     input[type="text"] {
-      width: 100%;
       background-color: rgba(255, 255, 255, 0.03);
       border: 1px solid var(--border-color);
-      border-radius: 12px;
-      padding: 14px 18px;
+      border-radius: 6px;
+      padding: 8px 12px;
       color: var(--text-main);
-      font-size: 15px;
+      font-size: 13px;
       transition: all 0.3s ease;
       outline: none;
+      width: 200px;
     }
 
     input[type="text"]:focus {
       border-color: var(--accent-primary);
-      box-shadow: 0 0 0 4px var(--accent-glow);
-      background-color: rgba(255, 255, 255, 0.05);
-    }
-
-    .json-editor-wrapper {
-      position: relative;
-      border-radius: 12px;
-      border: 1px solid var(--border-color);
-      overflow: hidden;
-      transition: all 0.3s ease;
-      background-color: rgba(10, 12, 16, 0.8);
-    }
-
-    .json-editor-wrapper:focus-within {
-      border-color: var(--accent-primary);
-      box-shadow: 0 0 0 4px var(--accent-glow);
-    }
-
-    textarea {
-      width: 100%;
-      height: 320px;
-      background: transparent;
-      border: none;
-      padding: 20px;
-      color: #e2e8f0;
-      font-family: 'Fira Code', monospace;
-      font-size: 13px;
-      line-height: 1.6;
-      resize: vertical;
-      outline: none;
-    }
-
-    .actions {
-      display: flex;
-      justify-content: flex-end;
-      align-items: center;
-      gap: 16px;
+      box-shadow: 0 0 0 3px var(--accent-glow);
     }
 
     button {
       background-color: var(--accent-primary);
       color: #fff;
       border: none;
-      border-radius: 12px;
-      padding: 14px 28px;
-      font-size: 15px;
+      border-radius: 6px;
+      padding: 8px 16px;
+      font-size: 13px;
       font-weight: 600;
       cursor: pointer;
-      transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+      transition: all 0.3s ease;
       display: flex;
       align-items: center;
       gap: 8px;
-      box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
     }
 
     button:hover {
       background-color: var(--accent-hover);
-      transform: translateY(-2px);
-      box-shadow: 0 8px 20px rgba(67, 97, 238, 0.4);
-    }
-
-    button:active {
-      transform: translateY(1px);
     }
 
     button:disabled {
-      background-color: #334155;
-      cursor: not-allowed;
-      box-shadow: none;
-      transform: none;
       opacity: 0.7;
+      cursor: not-allowed;
     }
 
     .btn-secondary {
       background-color: rgba(255, 255, 255, 0.05);
-      color: var(--text-main);
       border: 1px solid var(--border-color);
-      box-shadow: none;
     }
 
     .btn-secondary:hover {
       background-color: rgba(255, 255, 255, 0.1);
-      border-color: rgba(255, 255, 255, 0.2);
-      box-shadow: none;
     }
 
-    /* Loading indicator inside button */
     .spinner {
-      width: 18px;
-      height: 18px;
+      width: 14px;
+      height: 14px;
       border: 2px solid rgba(255, 255, 255, 0.3);
       border-radius: 50%;
       border-top-color: #fff;
@@ -248,18 +157,62 @@
       display: none;
     }
 
-    @keyframes spin {
-      to {
-        transform: rotate(360deg);
-      }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .loading .spinner { display: block; }
+    .loading .btn-text { display: none; }
+
+    .editor-container {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 24px;
+      overflow: hidden;
     }
 
-    .loading .spinner {
-      display: block;
+    .editor-box {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      overflow: hidden;
     }
 
-    .loading .btn-text {
-      display: none;
+    .editor-header {
+      padding: 12px 24px;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(255,255,255,0.02);
+    }
+
+    .editor-title {
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-muted);
+    }
+
+    textarea {
+      flex: 1;
+      width: 100%;
+      background: transparent;
+      border: none;
+      padding: 24px;
+      color: #e2e8f0;
+      font-family: 'Fira Code', monospace;
+      font-size: 14px;
+      line-height: 1.6;
+      resize: none;
+      outline: none;
     }
 
     /* Notification Toast */
@@ -277,7 +230,6 @@
       opacity: 0;
       transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
       z-index: 1000;
-      box-shadow: 0 10px 25px rgba(239, 35, 60, 0.3);
     }
 
     #toast.show {
@@ -285,45 +237,36 @@
       opacity: 1;
     }
 
-    #toast.success {
-      background: #2ec4b6;
-      box-shadow: 0 10px 25px rgba(46, 196, 182, 0.3);
-    }
+    #toast.success { background: #2ec4b6; }
   </style>
 </head>
-
 <body>
 
-  <div class="app-container">
-    <header>
-      <h1>Resume Builder</h1>
-      <p>Paste your professional data in JSON to generate a stunning PDF resume.</p>
-    </header>
-
-    <main>
-      <div class="form-group">
-        <label for="filename">Resume Name</label>
-        <input type="text" id="filename" placeholder="e.g., my_awesome_resume" value="sample_one_page_resume" required>
+  <nav>
+    <a href="/" class="logo">ResumeBuilder</a>
+    <div class="nav-actions">
+      <div class="form-group-inline">
+        <label for="filename">File:</label>
+        <input type="text" id="filename" placeholder="resume_name" value="john_resume">
       </div>
+      <button type="button" class="btn-secondary" id="load-sample">Load Sample</button>
+      <button type="button" id="generate-btn">
+        <span class="spinner"></span>
+        <span class="btn-text">Download PDF</span>
+      </button>
+    </div>
+  </nav>
 
-      <div class="form-group">
-        <label for="json-data">JSON Payload</label>
-        <div class="json-editor-wrapper">
-          <textarea id="json-data" spellcheck="false" placeholder='Paste your JSON schema here...'></textarea>
-        </div>
+  <div class="editor-container">
+    <div class="editor-box">
+      <div class="editor-header">
+        <span class="editor-title">JSON Editor</span>
       </div>
-
-      <div class="actions">
-        <button type="button" class="btn-secondary" id="load-sample">Load Sample</button>
-        <button type="button" id="generate-btn">
-          <span class="spinner"></span>
-          <span class="btn-text">Generate & Download PDF</span>
-        </button>
-      </div>
-    </main>
+      <textarea id="json-data" spellcheck="false" placeholder='Paste your JSON schema here...'></textarea>
+    </div>
   </div>
 
-  <div id="toast">Error validating request.</div>
+  <div id="toast"></div>
 
   <script>
     const jsonInput = document.getElementById('json-data');
@@ -333,73 +276,123 @@
     const toast = document.getElementById('toast');
 
     const sampleJson = {
-      "name": "Jane Doe",
-      "email": "janedoe@example.com",
-      "phone": "+1-555-0199",
-      "linkedin": "https://www.linkedin.com/in/janedoe",
-      "github": "https://github.com/janedoe",
-      "profile_summary": "Accomplished Software Engineer with a passion for building scalable, reliable web solutions. Proven ability to collaborate effectively in cross-functional teams and deliver clean, production-grade code aligned with modern best practices.",
-      "functional_areas": ["Full Stack Engineering", "System Design", "Cloud Architecture"],
-      "technical_skills": [
-        "Languages - JavaScript, Python, Go, C++",
-        "Frontend - React.js, Next.js, HTML5, CSS3",
-        "Backend & Databases - Node.js, Django, PostgreSQL, Redis",
-        "Cloud & DevOps - AWS, Docker, Kubernetes, CI/CD Pipelines"
+      "name": "John pradeepraj",
+      "email": "johnpradeep100@gmail.com",
+      "phone": "+91-9444542079",
+      "linkedin": "https://linkedin.com",
+      "github": "https://github.com",
+      "portfolio": "https://portfolio.com",
+      "profile_summary": "AI Engineer and Full Stack Developer with 2+ years of experience delivering production ready applications. Expertise in leveraging AI and automation to improve process efficiency. Proficient in Python, Next.js, React.js, and FastAPI for building scalable data solutions.",
+      "functional_areas": [
+        "Machine Learning",
+        "Full Stack Development",
+        "AI Engineer",
+        "Automation",
+        "GenAI Development",
+        "AI Agents"
       ],
+      "technical_skills": [
+        "Programming - TypeScript, Python, JavaScript, Java, C, C++",
+        "Frontend Development - React.js, Next.js, Tailwind CSS, Vite, shadcn/ui, Responsive UI design",
+        "Backend Development - Node.js, Express.js, Flask, REST API design, JWT Authentication",
+        "AI / LLM Engineering - OpenRouter APIs, RAG, LangChain, Grounding, Scikit-learn, PyTorch",
+        "Data & Storage - Supabase, MySQL, Vector Databases (Chroma)",
+        "DevOps & Tools - Git, Postman, Vercel, Firebase, Puppeteer, Cheerio, N8N"
+      ],
+      "education": {
+        "degree": "M.Tech Integrated in Software Engineering, VIT Vellore",
+        "duration": "08/2023 – 05/2028"
+      },
       "experience": [
         {
-          "company": "Tech Corp Global",
-          "role": "Software Engineer",
-          "duration": "06/2024 - Present",
-          "description": "Design and optimize critical microservices handling 10k+ daily active users, reducing API latency by 15%."
+          "company": "Beira Startup",
+          "role": "Tech Lead",
+          "duration": "12/2025 - Present",
+          "description": "Leading development of an AI-powered platform that converts vague client design ideas into clear, designer-ready briefs."
+        },
+        {
+          "company": "United Techno",
+          "role": "ML Intern",
+          "duration": "05/2025 - 08/2025",
+          "description": "Built an inventory demand prediction system using SQL Server, Flask, XGBoost, SVM, and regression models."
+        },
+        {
+          "company": "Perplexity",
+          "role": "Campus Ambassador",
+          "duration": "07/2025 - 12/2025",
+          "description": "Grew Perplexity AI's presence at VIT Vellore through events, workshops, and student community initiatives."
         }
       ],
       "projects": [
         {
-          "title": "Real-time Analytics Engine",
-          "duration": "01/2025 – 03/2025",
+          "title": "Inventory Management System with QR Code Tracking",
+          "duration": "12/2024 – 01/2025",
           "points": [
-            "Built a fast event tracking system processing million events per hour.",
-            "Integrated WebSockets to deliver sub-second live visual charts."
+            "Built a SaaS platform using React (Vite.js) with ShadCN UI and Tailwind CSS for a responsive and modern interface.",
+            "Integrated 70+ APIs to enable QR-based stock tracking, POS operations, and real-time low-stock alerts.",
+            "Designed an employee scheduling system with a Google Calendar-style UI for managing availability and shifts.",
+            "Implemented secure authentication using Firebase and JWT for role-based access control.",
+            "Integrated Gemini Flash 2.0 API for a context-aware AI assistant and applied SARIMAX in Django for intelligent sales and order forecasting."
+          ]
+        },
+        {
+          "title": "AI-Powered Marketplace for Designers and Founders",
+          "duration": "06/2024 – 12/2024",
+          "points": [
+            "Developed an AI-powered conversational assistant to automate merchandise brief creation through intelligent founder interviews.",
+            "Integrated LLMs (GPT-4o-mini via OpenRouter API) for context-aware interactions and structured output generation.",
+            "Built a responsive web application using Next.js, React, and Tailwind CSS with modern UI components and animations.",
+            "Implemented backend services using Firebase and Cloudinary for data management and file handling."
+          ]
+        },
+        {
+          "title": "Personalised Campus LLM",
+          "duration": "12/2025 - Present",
+          "points": [
+            "Developed a full-stack RAG (Retrieval Augmented Generation) system using Next.js (frontend) and FastAPI (backend) with a modular architecture.",
+            "Implemented secure authentication and role-based access control (Admin/Student) using JWT and SQLite for user management.",
+            "Designed a context-aware AI chat system integrating OpenRouter LLM to answer queries based on uploaded knowledge.",
+            "Developed a responsive, dark-themed chat UI with seamless interaction between frontend and backend services.",
+            "Ensured persistent storage and efficient retrieval using ChromaDB, maintaining knowledge across server restarts."
+          ]
+        },
+        {
+          "title": "Ai Deepfake Detection",
+          "duration": "",
+          "points": [
+            "Designed and developed a multi-layer forensic image analysis system to detect deepfakes images.",
+            "Combined AI-based detection with traditional forensic techniques, including Frequency Domain Analysis (FFT), Error Level Analysis (ELA), and EXIF metadata inspection.",
+            "Built a decision pipeline leveraging an open-source Hugging Face model and an OpenRouter VLM to classify images as AI-generated, edited, or authentic.",
+            "Developed a full-stack solution using Next.js (frontend) and FastAPI (backend) with SQLite DB."
           ]
         }
       ],
       "achievements": [
-        "Employee of the Month, Q4 2025",
-        "First Place Winner, Regional Hackathon"
+        "Winner, Yukta 26 Hackathon (National Level) – ₹10,000 prize, Top 1 among 250+ teams",
+        "Winner, Aicon at Sairam Engineering College (National Level) – ₹10,000 prize, out of 100+ teams",
+        "Winner, Codeathon 2.0 – ₹10,000 prize, ranked 1st among 50+ colleges",
+        "Winner, Park College Codeathon – ₹1,500 prize, from 600+ participants"
       ],
       "volunteer_experience": [
-        "Open Source Contributor at Green Software Foundation"
-      ],
-      "education": {
-        "degree": "Bachelor of Science in Computer Science, State University",
-        "duration": "2020 – 2024"
-      }
+        "Senior core member at THE AI/ML CLUB VIT Vellore"
+      ]
     };
 
-    // Load initial sample
-    jsonInput.value = JSON.stringify(sampleJson, null, 2);
+    function showToast(message, isSuccess = false) {
+      toast.textContent = message;
+      toast.className = isSuccess ? 'success show' : 'show';
+      setTimeout(() => { toast.classList.remove('show'); }, 4000);
+    }
 
     loadSampleBtn.addEventListener('click', () => {
       jsonInput.value = JSON.stringify(sampleJson, null, 2);
       showToast('Sample loaded successfully!', true);
     });
 
-    function showToast(message, isSuccess = false) {
-      toast.textContent = message;
-      toast.className = isSuccess ? 'success show' : 'show';
-      setTimeout(() => {
-        toast.classList.remove('show');
-      }, 4000);
-    }
-
     generateBtn.addEventListener('click', async () => {
       const rawJson = jsonInput.value.trim();
       let filename = filenameInput.value.trim() || 'resume';
-
-      if (!filename.endsWith('.pdf')) {
-        filename += '.pdf';
-      }
+      if (!filename.endsWith('.pdf')) filename += '.pdf';
 
       if (!rawJson) {
         showToast('JSON payload cannot be empty.');
@@ -414,20 +407,14 @@
         return;
       }
 
-      // Lock UI
       generateBtn.classList.add('loading');
       generateBtn.disabled = true;
 
       try {
         const response = await fetch('/pdf', {
           method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            data: parsedData,
-            filename: filename
-          })
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ data: parsedData, filename: filename })
         });
 
         if (!response.ok) {
@@ -454,7 +441,12 @@
         generateBtn.disabled = false;
       }
     });
+
+    // Initial load
+    jsonInput.value = JSON.stringify(sampleJson, null, 2);
+
   </script>
 </body>
-
+</html>cript>
+</body>
 </html>

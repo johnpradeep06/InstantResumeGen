@@ -1,5 +1,7 @@
 from flask import Flask, render_template, make_response, request, jsonify
+# pyrefly: ignore [missing-import]
 import pdfkit
+# pyrefly: ignore [missing-import]
 from PyPDF2 import PdfReader, PdfWriter
 import io
 import json
@@ -92,7 +94,28 @@ def render_with_chrome(rendered):
 
 @app.route("/")
 def index():
+    return render_template("home.html")
+
+@app.route("/builder")
+def builder():
     return render_template("index.html")
+
+@app.route("/preview", methods=["POST"])
+def preview():
+    payload = request.get_json()
+    if not payload:
+        return "Invalid JSON", 400
+    
+    if "data" in payload and isinstance(payload["data"], dict):
+        parsed_dict = payload["data"]
+    else:
+        parsed_dict = payload
+
+    try:
+        rendered = render_template("template.html", data=parsed_dict)
+        return rendered
+    except Exception as e:
+        return f"<div style='color:red; padding:20px; font-family:sans-serif;'>Error rendering preview: {str(e)}</div>", 500
 
 @app.route("/pdf", methods=["POST"])
 def generate_pdf():
