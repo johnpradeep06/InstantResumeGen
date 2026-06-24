@@ -5,7 +5,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Resume Generator | Minimalist Dark</title>
-  <meta name="description" content="Build pixel-perfect PDF resumes from JSON data. Zero formatting hassle, pure content focus.">
+  <meta name="description"
+    content="Build pixel-perfect PDF resumes from JSON data. Zero formatting hassle, pure content focus.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
@@ -92,13 +93,27 @@
     }
 
     @keyframes drift {
-      0% { transform: translate(0, 0) scale(1); }
-      100% { transform: translate(40px, 30px) scale(1.08); }
+      0% {
+        transform: translate(0, 0) scale(1);
+      }
+
+      100% {
+        transform: translate(40px, 30px) scale(1.08);
+      }
     }
 
     @keyframes pulse-glow {
-      0%, 100% { opacity: 0.5; transform: translateX(-50%) scale(1); }
-      50% { opacity: 0.8; transform: translateX(-50%) scale(1.15); }
+
+      0%,
+      100% {
+        opacity: 0.5;
+        transform: translateX(-50%) scale(1);
+      }
+
+      50% {
+        opacity: 0.8;
+        transform: translateX(-50%) scale(1.15);
+      }
     }
 
     /* ─── NAV ─── */
@@ -163,18 +178,37 @@
     }
 
     @keyframes slideUp {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     @keyframes slideRight {
-      from { opacity: 0; transform: translateX(40px); }
-      to { opacity: 1; transform: translateX(0); }
+      from {
+        opacity: 0;
+        transform: translateX(40px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
     }
 
     @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
     }
 
     .badge {
@@ -201,8 +235,15 @@
     }
 
     @keyframes badge-pulse {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.4; }
+
+      0%,
+      100% {
+        opacity: 1;
+      }
+
+      50% {
+        opacity: 0.4;
+      }
     }
 
     h1 {
@@ -256,7 +297,7 @@
       left: -100%;
       width: 100%;
       height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
       transition: left 0.5s;
     }
 
@@ -775,28 +816,44 @@
           JSON-Powered Resumes
         </div>
         <h1>Build Stunning Resumes in Seconds</h1>
-        <p class="subtitle">Paste your data as JSON and instantly generate a pixel-perfect, professional PDF. No drag-and-drop. No templates to fight with. Just clean output.</p>
+        <p class="subtitle">Paste your data as JSON and instantly generate a pixel-perfect, professional PDF. No
+          drag-and-drop. No templates to fight with. Just clean output.</p>
         <div class="cta-group">
           <a href="/builder" class="cta-btn" id="hero-cta">
             Start Building
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" /></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5"
+              stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+            </svg>
           </a>
           <a href="#how-it-works" class="cta-secondary">
             How It Works
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 13.5 12 21m0 0-7.5-7.5M12 21V3" /></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24"
+              stroke-width="2" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 13.5 12 21m0 0-7.5-7.5M12 21V3" />
+            </svg>
           </a>
         </div>
         <div class="features-row">
           <div class="feature-pill">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" /></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+              stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+            </svg>
             One-page PDF
           </div>
           <div class="feature-pill">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" /></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+              stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+            </svg>
             Zero sign-up
           </div>
           <div class="feature-pill">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" /></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+              stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+            </svg>
             Instant download
           </div>
         </div>
@@ -806,26 +863,32 @@
       <div class="hero-previews">
         <div class="preview-col">
           <a href="https://www.linkedin.com/in/johnpradeepraj/" target="_blank" class="image-card" id="preview-john">
-            <div class="preview-tag" onclick="openModal('/assets/john_res.png', event)">Preview</div>
-            <img src="/assets/john_res.png" alt="John Resume Preview">
+            <div class="preview-tag" onclick="openModal('/assets/john_res.jpg', event)">Preview</div>
+            <img src="/assets/john_res.jpg" alt="John Resume Preview">
             <div class="card-label">
               <span class="card-label-name">John Pradeep</span>
               <span class="card-label-link">
                 LinkedIn
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25" /></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5"
+                  stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25" />
+                </svg>
               </span>
             </div>
           </a>
         </div>
         <div class="preview-col">
           <a href="https://www.linkedin.com/in/dhanush-ts/" target="_blank" class="image-card" id="preview-dhanush">
-            <div class="preview-tag" onclick="openModal('/assets/dhanush.png', event)">Preview</div>
-            <img src="/assets/dhanush.png" alt="Dhanush Resume Preview">
+            <div class="preview-tag" onclick="openModal('/assets/dhanush.jpg', event)">Preview</div>
+            <img src="/assets/dhanush.jpg" alt="Dhanush Resume Preview">
             <div class="card-label">
               <span class="card-label-name">Dhanush T S</span>
               <span class="card-label-link">
                 LinkedIn
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25" /></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5"
+                  stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25" />
+                </svg>
               </span>
             </div>
           </a>
@@ -841,17 +904,20 @@
         <div class="step-card">
           <div class="step-number">1</div>
           <h3 class="step-title">Write Your JSON</h3>
-          <p class="step-desc">Structure your resume data — name, skills, experience — in a clean JSON format. We provide a ready-to-use template.</p>
+          <p class="step-desc">Structure your resume data — name, skills, experience — in a clean JSON format. We
+            provide a ready-to-use template.</p>
         </div>
         <div class="step-card">
           <div class="step-number">2</div>
           <h3 class="step-title">Preview Instantly</h3>
-          <p class="step-desc">See your resume come to life in real-time as you edit. Every change is reflected immediately in the live preview panel.</p>
+          <p class="step-desc">See your resume come to life in real-time as you edit. Every change is reflected
+            immediately in the live preview panel.</p>
         </div>
         <div class="step-card">
           <div class="step-number">3</div>
           <h3 class="step-title">Download PDF</h3>
-          <p class="step-desc">One click to export a perfectly formatted, single-page PDF ready to send to recruiters and hiring managers.</p>
+          <p class="step-desc">One click to export a perfectly formatted, single-page PDF ready to send to recruiters
+            and hiring managers.</p>
         </div>
       </div>
     </section>
@@ -891,9 +957,9 @@
       modal.classList.remove('active');
       document.body.style.overflow = ''; // Restore scrolling
     }
-    
+
     // Close modal on Escape key
-    document.addEventListener('keydown', function(event) {
+    document.addEventListener('keydown', function (event) {
       if (event.key === 'Escape') {
         closeModal();
       }
