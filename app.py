@@ -1,4 +1,4 @@
-from flask import Flask, render_template, make_response, request, jsonify
+from flask import Flask, render_template, make_response, request, jsonify, send_from_directory
 # pyrefly: ignore [missing-import]
 import pdfkit
 # pyrefly: ignore [missing-import]
@@ -99,6 +99,10 @@ def index():
 @app.route("/builder")
 def builder():
     return render_template("index.html")
+
+@app.route('/assets/<path:filename>')
+def serve_assets(filename):
+    return send_from_directory('resume assests', filename)
 
 @app.route("/preview", methods=["POST"])
 def preview():

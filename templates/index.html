@@ -11,6 +11,11 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap"
     rel="stylesheet">
+  <!-- Vercel Web Analytics -->
+  <script>
+    window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+  </script>
+  <script defer src="/_vercel/insights/script.js"></script>
   <style>
     :root {
       --bg-primary: #0a0c10;
@@ -256,6 +261,199 @@
     #toast.success {
       background: #2ec4b6;
     }
+
+    /* ─── Preview & Download Buttons ─── */
+    .btn-preview {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      opacity: 0.4;
+      pointer-events: none;
+      transition: all 0.3s ease;
+    }
+
+    .btn-preview.active {
+      opacity: 1;
+      pointer-events: auto;
+      border-color: rgba(67, 97, 238, 0.4);
+    }
+
+    .btn-preview.active:hover {
+      background: rgba(67, 97, 238, 0.15);
+      border-color: var(--accent-primary);
+    }
+
+    .btn-download {
+      background: linear-gradient(135deg, #2ec4b6, #1a9e92);
+      border: none;
+    }
+
+    .btn-download:hover {
+      background: linear-gradient(135deg, #28b0a3, #178a80);
+    }
+
+    /* ─── Modal ─── */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      z-index: 500;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+      padding: 24px;
+    }
+
+    .modal-overlay.open {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .modal-container {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      width: 100%;
+      max-width: 860px;
+      height: 90vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
+      transform: translateY(20px) scale(0.97);
+      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .modal-overlay.open .modal-container {
+      transform: translateY(0) scale(1);
+    }
+
+    .modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--border-color);
+      flex-shrink: 0;
+    }
+
+    .modal-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text-main);
+      letter-spacing: -0.3px;
+    }
+
+    .modal-close {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--border-color);
+      color: var(--text-muted);
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      padding: 0;
+      font-size: 18px;
+      line-height: 1;
+    }
+
+    .modal-close:hover {
+      background: rgba(255, 255, 255, 0.1);
+      color: var(--text-main);
+    }
+
+    .modal-body {
+      flex: 1;
+      overflow: auto; /* Allow both horizontal and vertical scroll */
+      background: var(--bg-secondary);
+      padding: 16px;
+    }
+
+    .iframe-scaler-wrapper {
+      position: relative;
+      margin: 0 auto;
+    }
+
+    .iframe-scaler {
+      width: 800px;
+      height: 1131px; /* A4 ratio */
+      transform-origin: top left;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    .iframe-scaler iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      display: block;
+      border-radius: 6px;
+      background: #fff;
+    }
+
+    .modal-footer {
+      padding: 16px 20px;
+      border-top: 1px solid var(--border-color);
+      flex-shrink: 0;
+    }
+
+    .modal-download-btn {
+      width: 100%;
+      background: linear-gradient(135deg, var(--accent-primary), #6366f1);
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      padding: 14px;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .modal-download-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(67, 97, 238, 0.4);
+    }
+
+    .modal-download-btn .spinner {
+      width: 16px;
+      height: 16px;
+    }
+
+    /* ─── Modal responsive ─── */
+    @media (max-width: 600px) {
+      .modal-overlay {
+        padding: 12px;
+      }
+
+      .modal-container {
+        max-width: 100%;
+        height: 90vh;
+        border-radius: 12px;
+      }
+
+      .modal-header {
+        padding: 12px 16px;
+      }
+
+      .modal-footer {
+        padding: 12px 16px;
+      }
+    }
   </style>
 </head>
 
@@ -269,9 +467,12 @@
         <input type="text" id="filename" placeholder="resume_name" value="john_doe_resume">
       </div>
       <button type="button" class="btn-secondary" id="load-sample">Load Sample</button>
-      <button type="button" id="generate-btn">
+      <button type="button" class="btn-preview" id="preview-btn">
+        <span>👁 Preview</span>
+      </button>
+      <button type="button" class="btn-download" id="generate-btn">
         <span class="spinner"></span>
-        <span class="btn-text">Download PDF</span>
+        <span class="btn-text">⬇ Download PDF</span>
       </button>
     </div>
   </nav>
@@ -285,6 +486,29 @@
     </div>
   </div>
 
+  <!-- Preview Modal -->
+  <div class="modal-overlay" id="preview-modal">
+    <div class="modal-container">
+      <div class="modal-header">
+        <span class="modal-title">Resume Preview</span>
+        <button class="modal-close" id="modal-close-btn">&times;</button>
+      </div>
+      <div class="modal-body" id="modal-body">
+        <div class="iframe-scaler-wrapper" id="iframe-scaler-wrapper">
+          <div class="iframe-scaler" id="iframe-scaler">
+            <iframe id="preview-iframe" title="Resume Preview"></iframe>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="modal-download-btn" id="modal-download-btn">
+          <span class="spinner"></span>
+          <span class="btn-text">⬇ Download Resume</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
   <div id="toast"></div>
 
   <script>
@@ -292,7 +516,36 @@
     const filenameInput = document.getElementById('filename');
     const generateBtn = document.getElementById('generate-btn');
     const loadSampleBtn = document.getElementById('load-sample');
+    const previewBtn = document.getElementById('preview-btn');
     const toast = document.getElementById('toast');
+
+    // Modal elements
+    const modal = document.getElementById('preview-modal');
+    const modalCloseBtn = document.getElementById('modal-close-btn');
+    const modalDownloadBtn = document.getElementById('modal-download-btn');
+    const previewIframe = document.getElementById('preview-iframe');
+    const iframeScaler = document.getElementById('iframe-scaler');
+    const iframeScalerWrapper = document.getElementById('iframe-scaler-wrapper');
+    const modalBody = document.getElementById('modal-body');
+
+    function scalePreview() {
+      // Calculate available width. If scrollbar is present, clientWidth accounts for it.
+      const bodyW = modalBody.clientWidth - 32; /* minus padding */
+      let scale = bodyW / 800;
+      
+      // Ensure it's readable on mobile by setting a minimum scale
+      // This will trigger horizontal scrolling instead of microscopic text
+      if (window.innerWidth <= 768) {
+        scale = Math.max(scale, 0.85);
+      }
+      
+      // Ensure it doesn't scale up too much on huge screens
+      const finalScale = Math.min(scale, 1.2);
+
+      iframeScaler.style.transform = `scale(${finalScale})`;
+      iframeScalerWrapper.style.width = `${800 * finalScale}px`;
+      iframeScalerWrapper.style.height = `${1131 * finalScale}px`;
+    }
 
 
     const resumeData = {
@@ -399,38 +652,80 @@
     };
 
 
-
     function showToast(message, isSuccess = false) {
       toast.textContent = message;
       toast.className = isSuccess ? 'success show' : 'show';
       setTimeout(() => { toast.classList.remove('show'); }, 4000);
     }
 
+    // ─── Activate Preview button when valid JSON is present ───
+    function checkJsonValid() {
+      const raw = jsonInput.value.trim();
+      if (!raw) { previewBtn.classList.remove('active'); return; }
+      try {
+        JSON.parse(raw);
+        previewBtn.classList.add('active');
+      } catch {
+        previewBtn.classList.remove('active');
+      }
+    }
+
+    jsonInput.addEventListener('input', checkJsonValid);
+
     loadSampleBtn.addEventListener('click', () => {
       jsonInput.value = JSON.stringify(resumeData, null, 2);
       showToast('Sample loaded successfully!', true);
+      checkJsonValid();
     });
 
-    generateBtn.addEventListener('click', async () => {
+    // ─── Preview Modal ───
+    function openModal() { modal.classList.add('open'); document.body.style.overflow = 'hidden'; }
+    function closeModal() { modal.classList.remove('open'); document.body.style.overflow = ''; }
+
+    modalCloseBtn.addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+    window.addEventListener('resize', () => { if (modal.classList.contains('open')) scalePreview(); });
+
+    previewBtn.addEventListener('click', async () => {
+      const rawJson = jsonInput.value.trim();
+      let parsedData;
+      try { parsedData = JSON.parse(rawJson); } catch { showToast('Invalid JSON.'); return; }
+
+      openModal();
+
+      try {
+        const res = await fetch('/preview', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ data: parsedData })
+        });
+        if (!res.ok) throw new Error('Preview failed');
+        const html = await res.text();
+        const doc = previewIframe.contentDocument || previewIframe.contentWindow.document;
+        doc.open();
+        doc.write(html);
+        doc.close();
+        // Wait a frame for layout then scale
+        requestAnimationFrame(() => { requestAnimationFrame(scalePreview); });
+      } catch (err) {
+        showToast('Failed to load preview.');
+        closeModal();
+      }
+    });
+
+    // ─── Download helper (shared by both buttons) ───
+    async function downloadResume(btn) {
       const rawJson = jsonInput.value.trim();
       let filename = filenameInput.value.trim() || 'resume';
       if (!filename.endsWith('.pdf')) filename += '.pdf';
 
-      if (!rawJson) {
-        showToast('JSON payload cannot be empty.');
-        return;
-      }
-
+      if (!rawJson) { showToast('JSON payload cannot be empty.'); return; }
       let parsedData;
-      try {
-        parsedData = JSON.parse(rawJson);
-      } catch (err) {
-        showToast('Invalid JSON structure. Please check for syntax errors.');
-        return;
-      }
+      try { parsedData = JSON.parse(rawJson); } catch { showToast('Invalid JSON structure.'); return; }
 
-      generateBtn.classList.add('loading');
-      generateBtn.disabled = true;
+      btn.classList.add('loading');
+      btn.disabled = true;
 
       try {
         const response = await fetch('/pdf', {
@@ -459,13 +754,17 @@
         console.error(error);
         showToast(`Failed: ${error.message}`);
       } finally {
-        generateBtn.classList.remove('loading');
-        generateBtn.disabled = false;
+        btn.classList.remove('loading');
+        btn.disabled = false;
       }
-    });
+    }
+
+    generateBtn.addEventListener('click', () => downloadResume(generateBtn));
+    modalDownloadBtn.addEventListener('click', () => downloadResume(modalDownloadBtn));
 
     // Initial load
     jsonInput.value = JSON.stringify(resumeData, null, 2);
+    checkJsonValid();
 
   </script>
 </body>
