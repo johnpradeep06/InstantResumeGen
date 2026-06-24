@@ -376,6 +376,13 @@
       text-transform: uppercase;
       border: 1px solid rgba(79, 109, 245, 0.2);
       z-index: 2;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .preview-tag:hover {
+      background: rgba(79, 109, 245, 0.2);
+      color: #fff;
     }
 
     .card-label {
@@ -681,6 +688,70 @@
         font-size: 12px;
       }
     }
+
+    /* ─── MODAL ─── */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(6, 8, 13, 0.95);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      z-index: 1000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .modal-content {
+      position: relative;
+      max-width: 90vw;
+      max-height: 90vh;
+      transform: scale(0.95);
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .modal-overlay.active .modal-content {
+      transform: scale(1);
+    }
+
+    .modal-content img {
+      max-width: 100%;
+      max-height: 90vh;
+      border-radius: 12px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 0 1px var(--border-color);
+      display: block;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: -40px;
+      right: 0;
+      background: none;
+      border: none;
+      color: var(--text-main);
+      font-size: 28px;
+      cursor: pointer;
+      padding: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: color 0.2s;
+    }
+
+    .modal-close:hover {
+      color: var(--accent-primary);
+    }
   </style>
 </head>
 
@@ -735,7 +806,7 @@
       <div class="hero-previews">
         <div class="preview-col">
           <a href="https://www.linkedin.com/in/johnpradeepraj/" target="_blank" class="image-card" id="preview-john">
-            <div class="preview-tag">Preview</div>
+            <div class="preview-tag" onclick="openModal('/assets/john_res.png', event)">Preview</div>
             <img src="/assets/john_res.png" alt="John Resume Preview">
             <div class="card-label">
               <span class="card-label-name">John Pradeep</span>
@@ -748,7 +819,7 @@
         </div>
         <div class="preview-col">
           <a href="https://www.linkedin.com/in/dhanush-ts/" target="_blank" class="image-card" id="preview-dhanush">
-            <div class="preview-tag">Preview</div>
+            <div class="preview-tag" onclick="openModal('/assets/dhanush.png', event)">Preview</div>
             <img src="/assets/dhanush.png" alt="Dhanush Resume Preview">
             <div class="card-label">
               <span class="card-label-name">Dhanush T S</span>
@@ -791,6 +862,43 @@
     <a href="https://www.linkedin.com/in/johnpradeepraj/" target="_blank" class="footer-btn">John</a>
     <a href="https://www.linkedin.com/in/dhanush-ts/" target="_blank" class="footer-btn">Dhanush</a>
   </footer>
+
+  <!-- Image Preview Modal -->
+  <div class="modal-overlay" id="imageModal" onclick="closeModal(event)">
+    <div class="modal-content" onclick="event.stopPropagation()">
+      <button class="modal-close" onclick="closeModal(event)">&times;</button>
+      <img id="modalImage" src="" alt="Resume Full Preview">
+    </div>
+  </div>
+
+  <script>
+    function openModal(imageSrc, event) {
+      event.preventDefault(); // Prevent navigating to LinkedIn
+      event.stopPropagation();
+      const modal = document.getElementById('imageModal');
+      const modalImg = document.getElementById('modalImage');
+      modalImg.src = imageSrc;
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden'; // Prevent scrolling
+    }
+
+    function closeModal(event) {
+      if (event) {
+        event.preventDefault();
+        event.stopPropagation();
+      }
+      const modal = document.getElementById('imageModal');
+      modal.classList.remove('active');
+      document.body.style.overflow = ''; // Restore scrolling
+    }
+    
+    // Close modal on Escape key
+    document.addEventListener('keydown', function(event) {
+      if (event.key === 'Escape') {
+        closeModal();
+      }
+    });
+  </script>
 </body>
 
 </html>
