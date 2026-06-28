@@ -37,23 +37,25 @@
     }
 
     body {
-      background-color: var(--bg-primary);
+      background: radial-gradient(circle at top, rgba(67, 97, 238, 0.2), transparent 28%),
+                  linear-gradient(180deg, #090b0f 0%, #0e1320 100%);
       color: var(--text-main);
       font-family: 'Inter', sans-serif;
-      height: 100vh;
+      min-height: 100vh;
       display: flex;
       flex-direction: column;
       overflow: hidden;
     }
 
     nav {
-      padding: 16px 24px;
+      padding: 20px 28px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      border-bottom: 1px solid var(--border-color);
-      background: rgba(10, 12, 16, 0.8);
-      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(11, 14, 19, 0.92);
+      backdrop-filter: blur(18px);
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.18);
       flex-shrink: 0;
     }
 
@@ -95,8 +97,9 @@
 
     .nav-actions {
       display: flex;
+      flex-wrap: wrap;
       align-items: center;
-      gap: 16px;
+      gap: 14px;
     }
 
     .form-group-inline {
@@ -107,6 +110,277 @@
 
     .form-group-inline label {
       font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .editor-mode {
+      align-items: center;
+    }
+
+    .mode-btn {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 8px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 13px;
+      transition: all 0.3s ease;
+    }
+
+    .mode-btn.active {
+      background: var(--accent-primary);
+      border-color: var(--accent-primary);
+      color: #fff;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    .btn-small {
+      padding: 6px 10px;
+      font-size: 12px;
+    }
+
+    .form-editor {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      min-height: 360px;
+      overflow-y: auto;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      background: rgba(8, 12, 20, 0.95);
+    }
+
+    .field-item,
+    .array-item {
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 16px;
+      padding: 18px;
+      background: rgba(255, 255, 255, 0.04);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .field-header,
+    .array-item-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: nowrap; /* keep heading and actions on one line */
+    }
+
+    .field-key,
+    .field-input,
+    .array-item-input {
+      background-color: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 12px;
+      color: var(--text-main);
+      padding: 12px 14px;
+      font-size: 14px;
+      outline: none;
+      width: 100%;
+      min-width: 180px;
+    }
+
+    .field-key {
+      flex: 1.2;
+      max-width: 320px;
+      min-width: 180px;
+    }
+
+    .field-value {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .field-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .field-actions button {
+      white-space: nowrap;
+    }
+
+    .array-editor {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .array-items {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .object-editor {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      padding-left: 8px;
+      border-left: 2px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .empty-state {
+      color: var(--text-muted);
+      padding: 14px 16px;
+      border: 1px dashed rgba(255, 255, 255, 0.16);
+      border-radius: 14px;
+      text-align: center;
+      background: rgba(255, 255, 255, 0.02);
+      font-size: 13px;
+    }
+
+    .field-label {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .editor-box {
+      min-height: 540px;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      flex: 1;
+      min-height: 0;
+    }
+
+    #fields-editor-box {
+      display: flex;
+      flex-direction: column;
+      min-height: 540px;
+      flex: 1;
+      min-height: 0;
+    }
+
+    .form-editor {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      min-height: 360px;
+      overflow-y: auto;
+      flex: 1;
+      min-height: 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      background: rgba(8, 12, 20, 0.95);
+      /* Ensure the form area can scroll inside the viewport regardless of parent sizing */
+      max-height: calc(100vh - 240px);
+    }
+
+    .field-heading {
+      color: #f8fafc;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      text-transform: capitalize;
+      margin-bottom: 6px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .field-header .field-heading {
+      flex: 1 1 auto;
+      min-width: 0; /* allow ellipsis */
+      margin-bottom: 0; /* keep on same line */
+    }
+
+    .field-header .field-actions {
+      flex: 0 0 auto;
+      margin-left: 12px;
+    }
+
+    .field-meta {
+      color: var(--text-muted);
+      font-size: 12px;
+      line-height: 1.4;
+    }
+
+    .editor-header {
+      padding: 18px 24px;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.03);
+      gap: 12px;
+    }
+
+    .editor-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: #eef2ff;
+    }
+
+    textarea {
+      flex: 1;
+      width: 100%;
+      background: transparent;
+      border: none;
+      padding: 26px;
+      color: #e2e8f0;
+      font-family: 'Fira Code', monospace;
+      font-size: 14px;
+      line-height: 1.8;
+      resize: none;
+      outline: none;
+      min-height: 460px;
+    }
+
+    .field-key {
+      flex: 1.2;
+      max-width: 280px;
+    }
+
+    .field-value,
+    .array-items {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .field-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .field-actions button {
+      white-space: nowrap;
+    }
+
+    .object-editor,
+    .array-editor {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      padding-left: 8px;
+      border-left: 2px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .empty-state {
+      color: var(--text-muted);
+      padding: 12px 14px;
+      border: 1px dashed rgba(255, 255, 255, 0.16);
+      border-radius: 10px;
+      text-align: center;
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .field-label {
+      font-size: 12px;
       color: var(--text-muted);
     }
 
@@ -159,6 +433,33 @@
     .btn-secondary:hover {
       background-color: rgba(255, 255, 255, 0.1);
     }
+    
+    /* Red dustbin remove button: icon-only with red border */
+    .btn-remove {
+      background: transparent;
+      border: 1px solid #e63946;
+      color: #e63946;
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      padding: 6px;
+    }
+
+    .btn-remove:hover {
+      background: rgba(230,57,70,0.06);
+      transform: translateY(-1px);
+    }
+
+    .btn-remove svg {
+      width: 16px;
+      height: 16px;
+      fill: #e63946;
+      display: block;
+    }
 
     .spinner {
       width: 14px;
@@ -191,7 +492,8 @@
       width: 100%;
       max-width: 1200px;
       margin: 0 auto;
-      padding: 24px;
+      padding: 30px 24px 36px;
+      gap: 22px;
       overflow: hidden;
     }
 
@@ -199,10 +501,10 @@
       flex: 1;
       display: flex;
       flex-direction: column;
-      background: var(--bg-secondary);
-      border: 1px solid var(--border-color);
-      border-radius: 12px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      background: rgba(16, 20, 29, 0.9);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 20px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
       overflow: hidden;
     }
 
@@ -226,15 +528,18 @@
     textarea {
       flex: 1;
       width: 100%;
-      background: transparent;
-      border: none;
-      padding: 24px;
+      background: rgba(8, 12, 20, 0.95);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 18px;
+      padding: 26px;
       color: #e2e8f0;
       font-family: 'Fira Code', monospace;
       font-size: 14px;
-      line-height: 1.6;
+      line-height: 1.8;
       resize: none;
       outline: none;
+      min-height: 520px;
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.03);
     }
 
     /* Notification Toast */
@@ -463,6 +768,11 @@
   <nav>
     <a href="/" class="logo">ResumeBuilder</a>
     <div class="nav-actions">
+      <div class="form-group-inline editor-mode">
+        <label>Mode:</label>
+        <button type="button" class="mode-btn active" id="mode-json">JSON</button>
+        <button type="button" class="mode-btn" id="mode-fields">Fields</button>
+      </div>
       <div class="form-group-inline">
         <label for="filename">File:</label>
         <input type="text" id="filename" placeholder="resume_name" value="john_doe_resume">
@@ -479,11 +789,21 @@
   </nav>
 
   <div class="editor-container">
-    <div class="editor-box">
+    <div class="editor-box" id="json-editor-box">
       <div class="editor-header">
         <span class="editor-title">JSON Editor</span>
       </div>
       <textarea id="json-data" spellcheck="false" placeholder='Paste your JSON schema here...'></textarea>
+    </div>
+
+    <div class="editor-box hidden" id="fields-editor-box">
+      <div class="editor-header">
+        <span class="editor-title">Structured Fields</span>
+      </div>
+      <div class="form-editor" id="form-editor"></div>
+      <div style="padding: 0 20px 20px; color: var(--text-muted); font-size: 13px;">
+        Tip: only one editor is visible at a time. Field headings cannot be deleted, but you can add and remove list items within each section.
+      </div>
     </div>
   </div>
 
@@ -520,6 +840,12 @@
     const previewBtn = document.getElementById('preview-btn');
     const toast = document.getElementById('toast');
 
+    const modeJsonBtn = document.getElementById('mode-json');
+    const modeFieldsBtn = document.getElementById('mode-fields');
+    const jsonEditorBox = document.getElementById('json-editor-box');
+    const fieldsEditorBox = document.getElementById('fields-editor-box');
+    const formEditor = document.getElementById('form-editor');
+
     // Modal elements
     const modal = document.getElementById('preview-modal');
     const modalCloseBtn = document.getElementById('modal-close-btn');
@@ -529,25 +855,308 @@
     const iframeScalerWrapper = document.getElementById('iframe-scaler-wrapper');
     const modalBody = document.getElementById('modal-body');
 
+    let editorMode = 'json';
+
+    function formatData(data) {
+      return JSON.stringify(data, null, 2);
+    }
+
+    function showToast(message, isSuccess = false) {
+      toast.textContent = message;
+      toast.className = isSuccess ? 'success show' : 'show';
+      setTimeout(() => { toast.classList.remove('show'); }, 4000);
+    }
+
+    function checkJsonValid() {
+      const raw = jsonInput.value.trim();
+      if (!raw) { previewBtn.classList.remove('active'); return false; }
+      try {
+        JSON.parse(raw);
+        previewBtn.classList.add('active');
+        return true;
+      } catch {
+        previewBtn.classList.remove('active');
+        return false;
+      }
+    }
+
+    function parseJsonValue(value) {
+      return value == null ? '' : String(value);
+    }
+
+    function toTitleCase(str) {
+      return String(str)
+        .replace(/[-_]/g, ' ')
+        .replace(/\w\S*/g, (txt) => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase());
+    }
+
+    function getParsedData() {
+      const raw = jsonInput.value.trim();
+      if (!raw) return {};
+      try {
+        return JSON.parse(raw);
+      } catch (err) {
+        showToast('Invalid JSON. Switch back to JSON editor to fix it.');
+        return null;
+      }
+    }
+
+    function setEditorMode(mode) {
+      if (mode === editorMode) return;
+      if (mode === 'fields') {
+        const parsed = getParsedData();
+        if (parsed === null) return;
+        if (Array.isArray(parsed) || typeof parsed !== 'object') {
+          showToast('Fields mode requires a JSON object at the root.');
+          return;
+        }
+        updateFormFromJson(parsed);
+        modeFieldsBtn.classList.add('active');
+        modeJsonBtn.classList.remove('active');
+        jsonEditorBox.classList.add('hidden');
+        jsonEditorBox.style.display = 'none';
+        fieldsEditorBox.classList.remove('hidden');
+        fieldsEditorBox.style.display = 'flex';
+      } else {
+        modeJsonBtn.classList.add('active');
+        modeFieldsBtn.classList.remove('active');
+        jsonEditorBox.classList.remove('hidden');
+        jsonEditorBox.style.display = 'flex';
+        fieldsEditorBox.classList.add('hidden');
+        fieldsEditorBox.style.display = 'none';
+      }
+      editorMode = mode;
+    }
+
+    function ensureRootEditor() {
+      let root = formEditor.querySelector('.object-editor');
+      if (!root) {
+        root = createObjectEditor({});
+        formEditor.innerHTML = '';
+        formEditor.appendChild(root);
+      }
+      return root;
+    }
+
+    function createObjectEditor(obj) {
+      const container = document.createElement('div');
+      container.className = 'object-editor';
+
+      const keys = Object.keys(obj);
+      if (!keys.length) {
+        const emptyState = document.createElement('div');
+        emptyState.className = 'empty-state';
+        emptyState.textContent = 'No fields to show. Load sample data or switch back to the JSON editor to add fields.';
+        container.appendChild(emptyState);
+        return container;
+      }
+
+      keys.forEach((key) => {
+        const value = obj[key];
+        container.appendChild(createFieldItem(key, value));
+      });
+
+      return container;
+    }
+
+    function createFieldItem(key, value) {
+      const item = document.createElement('div');
+      item.className = 'field-item';
+
+      const header = document.createElement('div');
+      header.className = 'field-header';
+
+      const keyLabel = document.createElement('div');
+      keyLabel.className = 'field-heading';
+      keyLabel.textContent = key ? toTitleCase(key) : 'Untitled';
+
+      const actions = document.createElement('div');
+      actions.className = 'field-actions';
+
+      const isArray = Array.isArray(value);
+      if (isArray) {
+        const addSubButton = document.createElement('button');
+        addSubButton.type = 'button';
+        addSubButton.className = 'btn-secondary btn-small';
+        addSubButton.innerHTML = '<span style="font-weight:700; margin-right:8px;">+</span> Add item';
+        addSubButton.addEventListener('click', () => {
+          const target = item.querySelector('.field-value > .array-editor');
+          if (!target) return;
+          const list = target.querySelector('.array-items');
+          list.appendChild(createArrayItem(''));
+          updateJsonFromForm();
+        });
+        actions.appendChild(addSubButton);
+      }
+
+      header.appendChild(keyLabel);
+      header.appendChild(actions);
+
+      const valueWrapper = document.createElement('div');
+      valueWrapper.className = 'field-value';
+
+      if (Array.isArray(value)) {
+        valueWrapper.appendChild(createArrayEditor(value));
+      } else if (value && typeof value === 'object') {
+        valueWrapper.appendChild(createObjectEditor(value));
+      } else {
+        const inputValue = document.createElement('input');
+        inputValue.className = 'field-input';
+        inputValue.type = 'text';
+        inputValue.value = parseJsonValue(value);
+        inputValue.placeholder = 'Field value';
+        inputValue.addEventListener('input', updateJsonFromForm);
+        valueWrapper.appendChild(inputValue);
+      }
+
+      item.appendChild(header);
+      item.appendChild(valueWrapper);
+      return item;
+    }
+
+    function createArrayEditor(arr) {
+      const arrayWrapper = document.createElement('div');
+      arrayWrapper.className = 'array-editor';
+
+      const list = document.createElement('div');
+      list.className = 'array-items';
+
+      if (!arr.length) {
+        list.appendChild(createArrayItem(''));
+      } else {
+        arr.forEach((value) => {
+          list.appendChild(createArrayItem(value));
+        });
+      }
+
+      const addButton = document.createElement('button');
+      addButton.type = 'button';
+      addButton.className = 'btn-secondary btn-small';
+      addButton.innerHTML = '<span style="font-weight:700; margin-right:8px;">+</span> Add item';
+      addButton.addEventListener('click', () => {
+        list.appendChild(createArrayItem(''));
+        updateJsonFromForm();
+      });
+
+      arrayWrapper.appendChild(list);
+      arrayWrapper.appendChild(addButton);
+      return arrayWrapper;
+    }
+
+    function createArrayItem(value) {
+      const item = document.createElement('div');
+      item.className = 'array-item';
+
+      const header = document.createElement('div');
+      header.className = 'array-item-header';
+
+      const label = document.createElement('span');
+      label.className = 'field-label';
+      label.textContent = 'Item';
+
+      const removeButton = document.createElement('button');
+      removeButton.type = 'button';
+      removeButton.className = 'btn-remove';
+      removeButton.title = 'Remove item';
+      // Dustbin SVG icon
+      removeButton.innerHTML = '<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M9 3v1H4v2h16V4h-5V3H9zm1 6v8h2V9h-2zm4 0v8h2V9h-2zM7 9v8h2V9H7z"/></svg>';
+      removeButton.addEventListener('click', () => {
+        item.remove();
+        updateJsonFromForm();
+      });
+
+      header.appendChild(label);
+      header.appendChild(removeButton);
+      item.appendChild(header);
+
+      if (Array.isArray(value)) {
+        item.appendChild(createArrayEditor(value));
+      } else if (value && typeof value === 'object') {
+        item.appendChild(createObjectEditor(value));
+      } else {
+        const input = document.createElement('input');
+        input.className = 'array-item-input';
+        input.type = 'text';
+        input.value = parseJsonValue(value);
+        input.placeholder = 'Item value';
+        input.addEventListener('input', updateJsonFromForm);
+        item.appendChild(input);
+      }
+
+      return item;
+    }
+
+    function parseFieldValue(wrapper) {
+      const objectEditor = wrapper.querySelector(':scope > .object-editor');
+      if (objectEditor) {
+        return serializeObjectEditor(objectEditor);
+      }
+      const arrayEditor = wrapper.querySelector(':scope > .array-editor');
+      if (arrayEditor) {
+        return serializeArrayEditor(arrayEditor);
+      }
+      const input = wrapper.querySelector('input');
+      return input ? input.value : '';
+    }
+
+    function serializeObjectEditor(container) {
+      const result = {};
+      const fields = Array.from(container.querySelectorAll(':scope > .field-item'));
+      fields.forEach((field) => {
+        const keyLabel = field.querySelector('.field-heading');
+        const key = keyLabel ? keyLabel.textContent.trim().toLowerCase().replace(/\s+/g, '_') : '';
+        if (!key) return;
+        const valueWrapper = field.querySelector('.field-value');
+        result[key] = parseFieldValue(valueWrapper);
+      });
+      return result;
+    }
+
+    function serializeArrayEditor(container) {
+      const result = [];
+      const items = Array.from(container.querySelectorAll(':scope > .array-items > .array-item'));
+      items.forEach((item) => {
+        const objectEditor = item.querySelector(':scope > .object-editor');
+        if (objectEditor) {
+          result.push(serializeObjectEditor(objectEditor));
+          return;
+        }
+        const arrayEditor = item.querySelector(':scope > .array-editor');
+        if (arrayEditor) {
+          result.push(serializeArrayEditor(arrayEditor));
+          return;
+        }
+        const input = item.querySelector('input');
+        result.push(input ? input.value : '');
+      });
+      return result;
+    }
+
+    function updateJsonFromForm() {
+      const root = formEditor.querySelector('.object-editor');
+      if (!root) return;
+      const data = serializeObjectEditor(root);
+      jsonInput.value = formatData(data);
+      checkJsonValid();
+    }
+
+    function updateFormFromJson(parsed) {
+      formEditor.innerHTML = '';
+      const editor = createObjectEditor(parsed && typeof parsed === 'object' && !Array.isArray(parsed) ? parsed : {});
+      formEditor.appendChild(editor);
+    }
+
     function scalePreview() {
-      // Calculate available width. If scrollbar is present, clientWidth accounts for it.
-      const bodyW = modalBody.clientWidth - 32; /* minus padding */
+      const bodyW = modalBody.clientWidth - 32;
       let scale = bodyW / 800;
-      
-      // Ensure it's readable on mobile by setting a minimum scale
-      // This will trigger horizontal scrolling instead of microscopic text
       if (window.innerWidth <= 768) {
         scale = Math.max(scale, 0.85);
       }
-      
-      // Ensure it doesn't scale up too much on huge screens
       const finalScale = Math.min(scale, 1.2);
-
       iframeScaler.style.transform = `scale(${finalScale})`;
       iframeScalerWrapper.style.width = `${800 * finalScale}px`;
       iframeScalerWrapper.style.height = `${1131 * finalScale}px`;
     }
-
 
     const resumeData = {
       "name": "John Doe",
@@ -652,71 +1261,41 @@
       ]
     };
 
-
-    function showToast(message, isSuccess = false) {
-      toast.textContent = message;
-      toast.className = isSuccess ? 'success show' : 'show';
-      setTimeout(() => { toast.classList.remove('show'); }, 4000);
-    }
-
-    // ─── Activate Preview button when valid JSON is present ───
-    function checkJsonValid() {
-      const raw = jsonInput.value.trim();
-      if (!raw) { previewBtn.classList.remove('active'); return; }
-      try {
-        JSON.parse(raw);
-        previewBtn.classList.add('active');
-      } catch {
-        previewBtn.classList.remove('active');
-      }
-    }
-
-    jsonInput.addEventListener('input', checkJsonValid);
-
-    loadSampleBtn.addEventListener('click', () => {
-      jsonInput.value = JSON.stringify(resumeData, null, 2);
-      showToast('Sample loaded successfully!', true);
-      checkJsonValid();
-    });
-
-    // ─── Preview Modal ───
     function openModal() { modal.classList.add('open'); document.body.style.overflow = 'hidden'; }
     function closeModal() { modal.classList.remove('open'); document.body.style.overflow = ''; }
 
-    modalCloseBtn.addEventListener('click', closeModal);
-    modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
-    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
-    window.addEventListener('resize', () => { if (modal.classList.contains('open')) scalePreview(); });
+    jsonInput.addEventListener('input', checkJsonValid);
+    modeJsonBtn.addEventListener('click', () => setEditorMode('json'));
+    modeFieldsBtn.addEventListener('click', () => setEditorMode('fields'));
 
-    previewBtn.addEventListener('click', async () => {
+    function openPreview() {
       const rawJson = jsonInput.value.trim();
       let parsedData;
       try { parsedData = JSON.parse(rawJson); } catch { showToast('Invalid JSON.'); return; }
 
       openModal();
-
-      try {
-        const res = await fetch('/preview', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ data: parsedData })
-        });
+      fetch('/preview', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ data: parsedData })
+      }).then(async (res) => {
         if (!res.ok) throw new Error('Preview failed');
-        const html = await res.text();
+        return res.text();
+      }).then((html) => {
         const doc = previewIframe.contentDocument || previewIframe.contentWindow.document;
         doc.open();
         doc.write(html);
         doc.close();
-        // Wait a frame for layout then scale
         requestAnimationFrame(() => { requestAnimationFrame(scalePreview); });
-      } catch (err) {
+      }).catch(() => {
         showToast('Failed to load preview.');
         closeModal();
-      }
-    });
+      });
+    }
 
-    // ─── Download helper (shared by both buttons) ───
-    async function downloadResume(btn) {
+    previewBtn.addEventListener('click', openPreview);
+
+    function downloadResume(btn) {
       const rawJson = jsonInput.value.trim();
       let filename = filenameInput.value.trim() || 'resume';
       if (!filename.endsWith('.pdf')) filename += '.pdf';
@@ -728,19 +1307,17 @@
       btn.classList.add('loading');
       btn.disabled = true;
 
-      try {
-        const response = await fetch('/pdf', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ data: parsedData, filename: filename })
-        });
-
+      fetch('/pdf', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ data: parsedData, filename: filename })
+      }).then(async (response) => {
         if (!response.ok) {
           const errData = await response.json().catch(() => ({}));
           throw new Error(errData.error || `Server returned ${response.status}`);
         }
-
-        const blob = await response.blob();
+        return response.blob();
+      }).then((blob) => {
         const url = window.URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.style.display = 'none';
@@ -749,24 +1326,43 @@
         document.body.appendChild(a);
         a.click();
         window.URL.revokeObjectURL(url);
-
         showToast('Resume generated and downloading!', true);
-      } catch (error) {
+      }).catch((error) => {
         console.error(error);
         showToast(`Failed: ${error.message}`);
-      } finally {
+      }).finally(() => {
         btn.classList.remove('loading');
         btn.disabled = false;
-      }
+      });
     }
 
     generateBtn.addEventListener('click', () => downloadResume(generateBtn));
     modalDownloadBtn.addEventListener('click', () => downloadResume(modalDownloadBtn));
 
-    // Initial load
-    jsonInput.value = JSON.stringify(resumeData, null, 2);
-    checkJsonValid();
+    modalCloseBtn.addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+    window.addEventListener('resize', () => { if (modal.classList.contains('open')) scalePreview(); });
 
+    function updateJsonAfterFormChange() {
+      if (editorMode !== 'fields') return;
+      updateJsonFromForm();
+    }
+
+    formEditor.addEventListener('input', updateJsonAfterFormChange);
+
+    loadSampleBtn.addEventListener('click', () => {
+      jsonInput.value = formatData(resumeData);
+      if (editorMode === 'fields') {
+        updateFormFromJson(resumeData);
+      }
+      showToast('Sample loaded successfully!', true);
+      checkJsonValid();
+    });
+
+    // Initial load
+    jsonInput.value = formatData(resumeData);
+    checkJsonValid();
   </script>
 </body>
 </html>
